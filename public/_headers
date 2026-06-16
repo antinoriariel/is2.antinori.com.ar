@@ -30,6 +30,11 @@
   Content-Disposition: attachment; filename="presentacion.md"
   Cache-Control: public, max-age=86400
 
+/downloads/zero_trust_paper.pdf
+  Content-Type: application/pdf
+  Content-Disposition: attachment; filename="zero_trust_paper.pdf"
+  Cache-Control: public, max-age=86400
+
 /downloads/zero_trust_paper.tex
   Content-Type: application/x-tex; charset=utf-8
   Content-Disposition: attachment; filename="zero_trust_paper.tex"
