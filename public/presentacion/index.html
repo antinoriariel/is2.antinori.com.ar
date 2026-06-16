@@ -573,12 +573,12 @@
 
       <div class="info-block">
         <div class="ib-label">Contexto actual</div>
-        <p class="ib-body">La Orden Ejecutiva 14028 (EE.UU., 2021) exigió a todas las agencias federales adoptar Zero Trust para 2024, reconociendo que el modelo perimetral ya no es viable. En Europa, ETSI publicó la especificación TS&nbsp;104&nbsp;102 (sept. 2025) estandarizando ZTA a nivel regional. El 72&nbsp;% de las organizaciones que adoptaron microservicios sin revisar su modelo de seguridad reportaron al menos un incidente grave en los primeros 12 meses (Sensors, 2025).</p>
+        <p class="ib-body">EE.UU. exigió ZTA a agencias federales para 2024 (EO 14028); ETSI lo estandarizó en Europa (TS&nbsp;104&nbsp;102, 2025). El 72&nbsp;% de las organizaciones sin revisión previa reportaron incidentes graves en los primeros 12 meses (Sensors, 2025).</p>
       </div>
 
       <div class="info-block">
         <div class="ib-label">Caso real &mdash; SolarWinds (2020)</div>
-        <p class="ib-body">Un atacante comprometió el sistema de build de SolarWinds e inyectó código malicioso en una actualización firmada. Con un único acceso inicial válido y movimiento lateral irrestricto, afectó a <strong>18.000 organizaciones</strong> &mdash; incluidas agencias del gobierno de EE.UU. &mdash; durante 9 meses sin ser detectado. Un modelo ZTA habría contenido el radio de daño al punto de compromiso inicial.</p>
+        <p class="ib-body">Código malicioso inyectado en una actualización firmada afectó a <strong>18.000 organizaciones</strong> durante 9 meses con movimiento lateral irrestricto. ZTA habría contenido el daño al punto de compromiso inicial.</p>
       </div>
 
       <div class="bal">
@@ -622,12 +622,12 @@
 
       <div class="info-block">
         <div class="ib-label">Contexto actual</div>
-        <p class="ib-body">NIST publicó SP&nbsp;800-207A en 2023 extendiendo ZTA a entornos cloud-nativos multi-nube. El mercado de soluciones ZTA proyecta superar USD&nbsp;60.000M para 2027. En 2025, el 62&nbsp;% de las organizaciones Fortune&nbsp;500 ya declaró tener al menos un pilar ZTA en producción, frente al 19&nbsp;% en 2021 (Gartner, 2025).</p>
+        <p class="ib-body">NIST extendió ZTA a cloud multi-nube en 2023 (SP&nbsp;800-207A). El mercado supera USD&nbsp;60.000M para 2027; el 62&nbsp;% de Fortune&nbsp;500 ya tiene al menos un pilar ZTA en producción (Gartner, 2025).</p>
       </div>
 
       <div class="info-block">
         <div class="ib-label">Caso real &mdash; Google BeyondCorp</div>
-        <p class="ib-body">Tras el ciberataque <em>Operation Aurora</em> (2009), Google eliminó la VPN corporativa y migró a un modelo de acceso basado en identidad y contexto del dispositivo. Hoy, <strong>más de 100.000 empleados</strong> acceden a todos los recursos internos desde cualquier red sin VPN. BeyondCorp demostró que ZTA es operativamente viable a escala industrial y sentó las bases del estándar NIST.</p>
+        <p class="ib-body">Tras <em>Operation Aurora</em> (2009), Google eliminó la VPN y migró a acceso basado en identidad. Hoy <strong>+100.000 empleados</strong> trabajan desde cualquier red sin VPN, sentando las bases del estándar NIST.</p>
       </div>
 
       <div class="bal">
@@ -702,12 +702,12 @@
 
       <div class="info-block">
         <div class="ib-label">Contexto actual</div>
-        <p class="ib-body">NIST SP&nbsp;800-207A (2023) añadió guía específica para cloud-nativo y multi-nube, extendiendo los tenets originales. Los sectores financiero y sanitario son los más avanzados en la adopción: regulaciones como PCI-DSS&nbsp;v4 y HIPAA alinean directamente sus controles con estos principios. La CISA publicó su ZTA Maturity Model (2022) con 5 pilares y 3 niveles para ayudar a las organizaciones a autoevaluar su madurez.</p>
+        <p class="ib-body">Finanzas y salud lideran la adopción: PCI-DSS v4 e HIPAA alinean sus controles con estos principios. La CISA publicó el ZTA Maturity Model (2022) con 5 pilares y 3 niveles de autoevaluación.</p>
       </div>
 
       <div class="info-block">
         <div class="ib-label">Caso real &mdash; Capital One</div>
-        <p class="ib-body">Capital One implementó los 7 principios NIST migrando sus servicios a AWS con políticas granulares por microservicio. Aplicaron el principio de <em>mínimo privilegio</em> eliminando roles <code>AdministratorAccess</code> en producción y el de <em>verificación continua</em> con re-autenticación contextual. Resultado: reducción del tiempo de detección de incidentes de <strong>24 h a 3 h</strong> y cero incidentes críticos en 2024.</p>
+        <p class="ib-body">Migración a AWS con políticas granulares por microservicio, eliminando roles <code>AdministratorAccess</code> en prod. Resultado: tiempo de detección reducido de <strong>24 h a 3 h</strong> y cero incidentes críticos en 2024.</p>
       </div>
 
       <div class="bal">
@@ -768,12 +768,12 @@
 
       <div class="info-block">
         <div class="ib-label">Contexto actual</div>
-        <p class="ib-body">Según el CNCF Survey 2024, el 63&nbsp;% de los clusters Kubernetes con service mesh usa Istio+Envoy como PEP. OPA (Open Policy Agent) es el motor de decisión de facto para policy-as-code, adoptado por Google, Netflix, Spotify y la mayoría de proveedores cloud. La tendencia 2025 es el <em>ambient mesh</em> de Istio: elimina el sidecar por pod y reduce el overhead de recursos en un 30&nbsp;%.</p>
+        <p class="ib-body">El 63&nbsp;% de clusters Kubernetes con service mesh usa Istio+Envoy como PEP (CNCF, 2024). OPA es el motor de decisión de facto, adoptado por Google, Netflix y Spotify. El <em>ambient mesh</em> de Istio (2025) elimina el sidecar y reduce overhead un 30&nbsp;%.</p>
       </div>
 
       <div class="info-block">
         <div class="ib-label">Caso real &mdash; Airbnb + Etsy</div>
-        <p class="ib-body"><strong>Airbnb</strong> implementó Envoy como PEP universal en 2019–2022, procesando más de 10 millones de RPS con mTLS entre todos sus microservicios. <strong>Etsy</strong> usa OPA para gestionar ~500 políticas actualizables en tiempo real sin redesplegar ningún servicio, respondiendo a cambios de negocio en minutos en lugar de ciclos de release.</p>
+        <p class="ib-body"><strong>Airbnb</strong> procesa +10M RPS con mTLS vía Envoy. <strong>Etsy</strong> gestiona ~500 políticas OPA actualizables en tiempo real sin redesplegar servicios, respondiendo a cambios en minutos.</p>
       </div>
 
       <div class="bal">
@@ -827,12 +827,12 @@
 
       <div class="info-block">
         <div class="ib-label">Contexto actual</div>
-        <p class="ib-body">El 72&nbsp;% de las organizaciones que implementan ZTA sin inventario previo reportan interrupciones de servicio en las primeras 4 semanas (PMC, 2025). Las herramientas de observabilidad de service mesh —Kiali, Hubble (Cilium), Jaeger— han simplificado considerablemente este relevamiento: permiten generar el mapa de dependencias de tráfico en horas sin tocar código ni infraestructura.</p>
+        <p class="ib-body">El 72&nbsp;% de las implementaciones ZTA sin inventario previo reportan interrupciones en las primeras 4 semanas (PMC, 2025). Kiali, Hubble y Jaeger permiten generar el mapa de dependencias en horas sin tocar código.</p>
       </div>
 
       <div class="info-block">
         <div class="ib-label">Caso real &mdash; banco europeo (Sensors 2025)</div>
-        <p class="ib-body">Durante el relevamiento inicial de una entidad bancaria europea, el equipo descubrió que el <strong>40&nbsp;% de sus credenciales de base de datos</strong> estaban expuestas en variables de entorno de Kubernetes, visibles a través de la API del cluster sin autenticación especial. Este hallazgo &mdash;desconocido por el equipo de seguridad&mdash; fue corregido antes de activar ninguna política ZTA, evitando una brecha potencial de datos regulados.</p>
+        <p class="ib-body">Durante el relevamiento inicial, el equipo descubrió que el <strong>40&nbsp;% de las credenciales de base de datos</strong> estaban expuestas en variables de entorno de Kubernetes, visibles via API sin autenticación especial. El hallazgo fue corregido antes de activar ZTA.</p>
       </div>
 
       <div class="bal">
@@ -872,12 +872,12 @@
 
       <div class="info-block">
         <div class="ib-label">Contexto actual</div>
-        <p class="ib-body">Según el PMC (Sensors 2025), el 65&nbsp;% de las implementaciones ZTA que fracasan presentan al menos dos de estos cinco errores. El más frecuente es el mTLS en modo permisivo permanente (78&nbsp;% de los casos auditados). La segunda causa más común son los secretos en variables de entorno: Kubernetes expone todas las env vars de un pod a cualquier proceso con acceso a la API, sin restricción de namespace.</p>
+        <p class="ib-body">El 65&nbsp;% de las implementaciones ZTA fallidas presentan al menos dos de estos errores; el más frecuente es mTLS permanente en modo permisivo (78&nbsp;% de los casos auditados) (Sensors, 2025).</p>
       </div>
 
       <div class="info-block">
         <div class="ib-label">Caso real &mdash; fintech (2023)</div>
-        <p class="ib-body">Una empresa de pagos online expuso datos de <strong>2 millones de clientes</strong> cuando un atacante comprometió un pod de bajo privilegio y leyó las variables de entorno de los pods vecinos en el mismo namespace. Las credenciales de producción estaban literalmente en texto plano: <code>DB_PASSWORD=prod_secret_xyz</code>. La corrección habría sido trivial con un gestor de secretos dinámico; el costo real fue una multa regulatoria de USD 8M.</p>
+        <p class="ib-body">Un atacante leyó env vars de pods vecinos y obtuvo credenciales en texto plano (<code>DB_PASSWORD=prod_secret_xyz</code>), exponiendo datos de <strong>2 millones de clientes</strong>. Multa regulatoria: USD 8M. Un gestor de secretos con TTL lo habría evitado.</p>
       </div>
 
       <div class="bal">
@@ -934,12 +934,12 @@
 
       <div class="info-block">
         <div class="ib-label">Contexto actual</div>
-        <p class="ib-body">La CISA publicó el ZTA Maturity Model (2022) con 5 pilares y 3 niveles de madurez, usado como referencia para autoevaluar el progreso. Las organizaciones que adoptan ZTA de forma incremental tienen <strong>3× más probabilidades</strong> de completar la migración en plazo que las que intentan una transición masiva (Wiley, 2025). El período transitorio típico &mdash;con coexistencia de controles ZTA y perimetrales&mdash; dura entre 12 y 24 meses.</p>
+        <p class="ib-body">Adopción incremental: <strong>3× más probabilidades</strong> de completar la migración en plazo vs. transición masiva (Wiley, 2025). El período transitorio típico con controles ZTA y perimetrales coexistiendo es de 12–24 meses.</p>
       </div>
 
       <div class="info-block">
         <div class="ib-label">Caso real &mdash; Departamento de Defensa de EE.UU.</div>
-        <p class="ib-body">El DoD inició su adopción ZTA en 2022 con un piloto de 5 servicios internos. Para 2025 tiene más de <strong>1.000 servicios bajo control ZTA</strong> activo, siguiendo un roadmap incremental de 5 etapas con revisiones trimestrales. Publicó su ZTA Reference Architecture (2022) como guía pública, adoptada posteriormente por varios gobiernos y empresas del sector defensa como template de implementación.</p>
+        <p class="ib-body">Piloto con 5 servicios en 2022; para 2025 supera <strong>1.000 servicios bajo ZTA activo</strong> siguiendo un roadmap de 5 etapas con revisiones trimestrales. Su ZTA Reference Architecture (2022) es template de referencia para gobiernos y sector defensa.</p>
       </div>
 
       <div class="bal">
@@ -997,12 +997,12 @@
 
       <div class="info-block">
         <div class="ib-label">Contexto actual</div>
-        <p class="ib-body">GitHub Actions, GitLab CI y Tekton soportan OIDC para credenciales efímeras en CI/CD desde 2023, eliminando la necesidad de tokens estáticos de larga vida en los pipelines. El marco SLSA (Supply chain Levels for Software Artifacts) v1.0 se alinea directamente con los principios ZTA para la cadena de suministro de software. Solo el 50&nbsp;% de las implementaciones DevSecOps tienen trazabilidad robusta de extremo a extremo (PMC, Sensors 2025).</p>
+        <p class="ib-body">GitHub Actions, GitLab CI y Tekton soportan OIDC para credenciales efímeras desde 2023, eliminando tokens estáticos. SLSA v1.0 alinea la cadena de suministro con principios ZTA. Solo el 50&nbsp;% tiene trazabilidad robusta end-to-end (PMC, 2025).</p>
       </div>
 
       <div class="info-block">
         <div class="ib-label">Caso real &mdash; Netflix</div>
-        <p class="ib-body">Netflix integra escaneo de imágenes con <strong>Trivy</strong>, firma de contenedores con <strong>Cosign/Sigstore</strong> y credenciales efímeras SPIFFE en su pipeline de CI/CD, procesando más de <strong>1.000 deployments/día</strong>. Ningún secreto estático entra al pipeline: las identidades de los jobs CI se emiten como SVIDs con TTL de 15 minutos. La adopción de este enfoque eliminó el vector de ataque por token robado de pipeline, que había comprometido a competidores del sector en 2022.</p>
+        <p class="ib-body">Trivy + Cosign/Sigstore + SVIDs SPIFFE con TTL de 15 min en CI/CD. Más de <strong>1.000 deployments/día</strong> sin secretos estáticos en el pipeline, eliminando el vector de token robado que comprometió competidores en 2022.</p>
       </div>
 
       <div class="bal">
@@ -1042,12 +1042,12 @@
 
       <div class="info-block">
         <div class="ib-label">Contexto actual y tendencias 2025–2026</div>
-        <p class="ib-body">ZTA es hoy el estándar de facto para organizaciones cloud-native. Las tendencias emergentes incluyen: <strong>ZTA para agentes de IA</strong> (los agentes autónomos necesitan identidades SPIFFE propias con alcance limitado), integración con <strong>criptografía post-cuántica</strong> (NIST FIPS 203/204/205 ya debe considerarse en el diseño de sistemas de identidad), y <strong>ZTA multi-nube</strong> con planos de control federados entre AWS, GCP y Azure bajo un único marco de políticas.</p>
+        <p class="ib-body">Tendencias emergentes: <strong>ZTA para agentes de IA</strong> (identidades SPIFFE con alcance limitado), <strong>criptografía post-cuántica</strong> (NIST FIPS 203/204/205) en sistemas de identidad, y <strong>ZTA multi-nube</strong> con planos de control federados entre AWS, GCP y Azure.</p>
       </div>
 
       <div class="info-block">
         <div class="ib-label">Reflexión final &mdash; costo real de la inacción</div>
-        <p class="ib-body">Los 18.000 afectados por SolarWinds, los USD 8M de multa del caso fintech, los 2 meses que Capital One tardó en detectar su brecha de 2019 &mdash;todos tienen en común la ausencia de los principios ZTA. No es una tecnología para grandes empresas: es un conjunto de principios que pueden aplicarse progresivamente desde el primer servicio crítico, con herramientas open source maduras disponibles hoy.</p>
+        <p class="ib-body">18.000 afectados (SolarWinds), USD 8M de multa (fintech), 2 meses sin detectar la brecha (Capital One): todos tienen en común la ausencia de principios ZTA. Las herramientas open source están maduras y disponibles hoy.</p>
       </div>
 
       <div class="bal">
