@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZTA — Presentación · UNNE IS2 · Ariel Antinori</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --max: 760px;
+      --pad: 40px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Merriweather', Georgia, serif;
+      background: #fff;
+      color: #111;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── Topbar ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      border-bottom: 1px solid #111;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px var(--pad);
+      max-width: 100%;
+    }
+
+    .topbar a {
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: #111;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+
+    .topbar a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    .topbar span {
+      font-size: 0.65rem;
+      font-weight: 300;
+      color: #aaa;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── Wrapper ── */
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+    }
+
+    /* ── Portada ── */
+    .cover {
+      padding: 72px 0 56px;
+      border-bottom: 2px solid #111;
+      margin-bottom: 48px;
+    }
+
+    .cover-kicker {
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .cover-sub {
+      font-size: 0.92rem;
+      font-weight: 300;
+      font-style: italic;
+      color: #555;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .cover-author {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: #444;
+      line-height: 2;
+    }
+
+    .cover-author a { color: #111; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ── Índice ── */
+    .toc {
+      margin-bottom: 64px;
+    }
+
+    .toc-title {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 14px;
+    }
+
+    .toc ol {
+      list-style: none;
+      border-top: 1px solid #eee;
+    }
+
+    .toc li {
+      border-bottom: 1px solid #eee;
+    }
+
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 9px 0;
+      color: #111;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 400;
+      gap: 16px;
+    }
+
+    .toc a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    .toc-num {
+      font-size: 0.62rem;
+      font-weight: 300;
+      color: #bbb;
+      flex-shrink: 0;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Secciones ── */
+    .sec {
+      margin-bottom: 72px;
+      scroll-margin-top: 60px;
+    }
+
+    .sec-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid #111;
+      margin-bottom: 32px;
+    }
+
+    .sec-num {
+      font-size: 0.6rem;
+      font-weight: 300;
+      color: #aaa;
+      letter-spacing: 0.14em;
+      flex-shrink: 0;
+    }
+
+    .sec-header h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    /* ── Listas ── */
+    .items { list-style: none; }
+
+    .items li {
+      display: flex;
+      gap: 14px;
+      align-items: baseline;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 0.85rem;
+      line-height: 1.65;
+    }
+
+    .items li:last-child { border-bottom: none; }
+
+    .items .mk {
+      font-size: 0.58rem;
+      font-weight: 700;
+      color: #bbb;
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+      padding-top: 3px;
+    }
+
+    /* ── Cita ── */
+    .quote {
+      border-left: 4px solid #111;
+      padding: 20px 24px;
+      margin: 28px 0;
+    }
+
+    .quote blockquote {
+      font-size: 1.05rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.6;
+      color: #111;
+      margin-bottom: 10px;
+    }
+
+    .quote cite {
+      font-size: 0.65rem;
+      font-weight: 400;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-style: normal;
+    }
+
+    /* ── Stats ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: #111;
+      border: 1px solid #111;
+      margin: 28px 0;
+    }
+
+    .stat {
+      background: #fff;
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .stat-n {
+      font-size: 1.7rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-l {
+      font-size: 0.62rem;
+      font-weight: 300;
+      font-style: italic;
+      color: #555;
+      line-height: 1.45;
+    }
+
+    /* ── Principios ── */
+    .principles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid #ddd;
+    }
+
+    .pr {
+      padding: 18px 20px;
+      border-bottom: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+    }
+
+    .pr:nth-child(even) { border-right: none; }
+    .pr:nth-last-child(-n+2) { border-bottom: none; }
+
+    .pr-n {
+      font-size: 0.55rem;
+      font-weight: 700;
+      color: #ccc;
+      letter-spacing: 0.15em;
+      margin-bottom: 5px;
+    }
+
+    .pr-t {
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .pr-d {
+      font-size: 0.7rem;
+      font-weight: 300;
+      font-style: italic;
+      color: #666;
+      line-height: 1.4;
+    }
+
+    /* ── Diagrama ── */
+    .diagram {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.72rem;
+      line-height: 1.75;
+      background: #f8f8f8;
+      border: 1px solid #ddd;
+      padding: 24px 28px;
+      margin: 24px 0;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    /* ── Dos columnas ── */
+    .cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 4px;
+    }
+
+    .col-t {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    /* ── Leyenda ── */
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .leg-k {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      margin-bottom: 5px;
+    }
+
+    .leg-v {
+      font-size: 0.68rem;
+      font-weight: 300;
+      font-style: italic;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    /* ── Flujo DevSecOps ── */
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid #ddd;
+      margin: 24px 0;
+    }
+
+    .flow-col {
+      padding: 16px 14px;
+      border-right: 1px solid #ddd;
+    }
+
+    .flow-col:last-child { border-right: none; }
+
+    .flow-ph {
+      font-size: 0.57rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .flow-items {
+      font-size: 0.7rem;
+      font-weight: 300;
+      font-style: italic;
+      color: #444;
+      line-height: 1.9;
+    }
+
+    /* ── Conclusiones ── */
+    .conclusion-list { list-style: none; }
+
+    .conclusion-list li {
+      display: flex;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 0.88rem;
+      line-height: 1.65;
+      align-items: baseline;
+    }
+
+    .conclusion-list li:last-child { border-bottom: none; }
+
+    .c-mark { font-weight: 700; flex-shrink: 0; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 2px solid #111;
+      padding: 32px 0 64px;
+      margin-top: 16px;
+    }
+
+    footer .f-name { font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; }
+    footer .f-role { font-size: 0.72rem; font-weight: 300; color: #666; margin-bottom: 8px; line-height: 1.6; }
+    footer a { color: #111; font-size: 0.72rem; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      :root { --pad: 20px; }
+      .cover h1 { font-size: 1.7rem; }
+      .cols, .principles, .legend, .flow { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr; }
+      .pr:nth-child(even) { border-right: 1px solid #ddd; }
+      .pr:nth-last-child(-n+2) { border-bottom: 1px solid #ddd; }
+      .pr:last-child { border-bottom: none; }
+      .flow-col { border-right: none; border-bottom: 1px solid #ddd; }
+      .flow-col:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="/">← Inicio</a>
+  <span>UNNE &middot; IS2 &middot; 2026</span>
+</nav>
+
+<div class="wrap">
+
+  <!-- ── Portada ── -->
+  <header class="cover">
+    <p class="cover-kicker">Universidad Nacional del Nordeste &middot; Ingeniería del Software II</p>
+    <h1>Arquitectura de<br>Confianza Cero</h1>
+    <p class="cover-sub">Zero Trust Architecture (ZTA) en el desarrollo de microservicios</p>
+    <div class="cover-author">
+      <strong>Ariel Antinori</strong><br>
+      <a href="mailto:ariel.antinori@comunidad.unne.edu.ar">ariel.antinori@comunidad.unne.edu.ar</a><br>
+      Junio 2026
+    </div>
+  </header>
+
+  <!-- ── Índice ── -->
+  <nav class="toc">
+    <p class="toc-title">Contenido</p>
+    <ol>
+      <li><a href="#problema"><span>El paradigma perimetral y sus fallas</span><span class="toc-num">01</span></a></li>
+      <li><a href="#zta"><span>Zero Trust Architecture</span><span class="toc-num">02</span></a></li>
+      <li><a href="#principios"><span>Los 7 principios &mdash; NIST SP 800-207</span><span class="toc-num">03</span></a></li>
+      <li><a href="#modelo"><span>Componentes del modelo &mdash; PEP &middot; PDP &middot; PA</span><span class="toc-num">04</span></a></li>
+      <li><a href="#identidad"><span>Identidad como perímetro &mdash; SPIFFE/SPIRE y mTLS</span><span class="toc-num">05</span></a></li>
+      <li><a href="#autorizacion"><span>Autorización &mdash; OAuth 2.0 / OIDC y OPA</span><span class="toc-num">06</span></a></li>
+      <li><a href="#infraestructura"><span>Service mesh, microsegmentación y secretos</span><span class="toc-num">07</span></a></li>
+      <li><a href="#devsecops"><span>DevSecOps y desafíos de implementación</span><span class="toc-num">08</span></a></li>
+      <li><a href="#conclusiones"><span>Conclusiones</span><span class="toc-num">09</span></a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- 01 -->
+    <section class="sec" id="problema">
+      <div class="sec-header">
+        <span class="sec-num">01</span>
+        <h2>El paradigma perimetral y sus fallas</h2>
+      </div>
+
+      <p style="font-size:0.85rem;margin-bottom:20px">El modelo <em>castle-and-moat</em> asumía que todo tráfico interno a la red corporativa era inherentemente confiable. Esta premisa resultó ser una falla estructural.</p>
+
+      <ul class="items">
+        <li><span class="mk">—</span><span>Un atacante que traspasa el perímetro obtiene <strong>acceso irrestricto</strong> y puede moverse lateralmente sin obstáculos</span></li>
+        <li><span class="mk">—</span><span>En microservicios, el tráfico <em>este-oeste</em> entre servicios fluye <strong>sin cifrar, sin autenticar</strong> y sin autorizar</span></li>
+        <li><span class="mk">—</span><span>Las identidades de red (IPs) en Kubernetes son <strong>efímeras</strong>: una dirección puede reasignarse en segundos a otro pod</span></li>
+        <li><span class="mk">—</span><span>Las amenazas internas con credenciales válidas tienen <strong>acceso amplio e irrestricto</strong> una vez dentro</span></li>
+      </ul>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-n">+321%</div>
+          <div class="stat-l">Brechas en APIs en 2024<br><em>Markaicode, 2025</em></div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">89%</div>
+          <div class="stat-l">Organizaciones con incidentes en Kubernetes<br><em>Groundcover, 2026</em></div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">$4.44M</div>
+          <div class="stat-l">Costo promedio de una brecha<br><em>IBM, 2025</em></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section class="sec" id="zta">
+      <div class="sec-header">
+        <span class="sec-num">02</span>
+        <h2>Zero Trust Architecture</h2>
+      </div>
+
+      <div class="quote">
+        <blockquote>&ldquo;Ninguna entidad &mdash; usuario, dispositivo, servicio o segmento de red &mdash; debe recibir confianza implícita por su ubicación.&rdquo;</blockquote>
+        <cite>NIST SP 800-207, 2020</cite>
+      </div>
+
+      <ul class="items">
+        <li><span class="mk">01</span><span><strong>Verificar</strong> &mdash; identidad explícita en cada solicitud, independientemente de la ubicación de red</span></li>
+        <li><span class="mk">02</span><span><strong>Autorizar</strong> &mdash; mínimo privilegio, acotado a la sesión y al recurso solicitado</span></li>
+        <li><span class="mk">03</span><span><strong>Monitorear</strong> &mdash; supervisión continua del comportamiento de toda entidad humana y no humana</span></li>
+      </ul>
+    </section>
+
+    <!-- 03 -->
+    <section class="sec" id="principios">
+      <div class="sec-header">
+        <span class="sec-num">03</span>
+        <h2>Los 7 principios &mdash; NIST SP 800-207</h2>
+      </div>
+
+      <div class="principles">
+        <div class="pr">
+          <div class="pr-n">01</div>
+          <div class="pr-t">Nunca confiar, siempre verificar</div>
+          <div class="pr-d">Sin confianza implícita por ubicación de red</div>
+        </div>
+        <div class="pr">
+          <div class="pr-n">02</div>
+          <div class="pr-t">Mínimo privilegio</div>
+          <div class="pr-d">Acceso acotado al tiempo y la sesión mínimos</div>
+        </div>
+        <div class="pr">
+          <div class="pr-n">03</div>
+          <div class="pr-t">Asumir la brecha</div>
+          <div class="pr-d">Diseñar para contener el radio de daño</div>
+        </div>
+        <div class="pr">
+          <div class="pr-n">04</div>
+          <div class="pr-t">Verificación continua</div>
+          <div class="pr-d">Autenticación permanente, no solo al inicio de sesión</div>
+        </div>
+        <div class="pr">
+          <div class="pr-n">05</div>
+          <div class="pr-t">Acceso por sesión</div>
+          <div class="pr-d">Política dinámica por solicitud individual</div>
+        </div>
+        <div class="pr">
+          <div class="pr-n">06</div>
+          <div class="pr-t">Recursos como externos</div>
+          <div class="pr-d">Sin distinción entre red interna y externa</div>
+        </div>
+        <div class="pr">
+          <div class="pr-n">07</div>
+          <div class="pr-t">Identidades consistentes</div>
+          <div class="pr-d">Humanas y no humanas: workloads, CI/CD, agentes de IA</div>
+        </div>
+        <div class="pr" style="background:#f8f8f8;display:flex;align-items:center">
+          <div class="pr-d">Fuente: NIST SP 800-207 (2020)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section class="sec" id="modelo">
+      <div class="sec-header">
+        <span class="sec-num">04</span>
+        <h2>Componentes del modelo &mdash; PEP &middot; PDP &middot; PA</h2>
+      </div>
+
+      <div class="diagram">  Solicitud
+      │
+      ▼
+  ┌──────────────┐    ¿Permitir?    ┌──────────────┐
+  │     PEP      │ ───────────────▶ │     PDP      │
+  │  Envoy proxy │ ◀─ Allow/Deny ── │     OPA      │
+  └──────┬───────┘                  └──────────────┘
+         │ (si Allow)                      ▲
+         ▼                                 │
+    Servicio destino               ┌───────┴──────┐
+                                   │      PA      │
+                                   │  (políticas) │
+                                   └──────────────┘</div>
+
+      <div class="legend">
+        <div>
+          <div class="leg-k">PEP &mdash; Policy Enforcement Point</div>
+          <div class="leg-v">Proxy Envoy (Istio). Intercepta todo el tráfico e impone la decisión de acceso.</div>
+        </div>
+        <div>
+          <div class="leg-k">PDP &mdash; Policy Decision Point</div>
+          <div class="leg-v">Open Policy Agent (OPA). Evalúa políticas Rego y devuelve Allow o Deny.</div>
+        </div>
+        <div>
+          <div class="leg-k">PA &mdash; Policy Administrator</div>
+          <div class="leg-v">Gestiona el ciclo de vida de políticas: creación, distribución y revocación.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section class="sec" id="identidad">
+      <div class="sec-header">
+        <span class="sec-num">05</span>
+        <h2>Identidad como perímetro &mdash; SPIFFE/SPIRE y mTLS</h2>
+      </div>
+
+      <div class="cols">
+        <div>
+          <p class="col-t">SPIFFE / SPIRE &mdash; Identidad de workload</p>
+          <ul class="items">
+            <li><span class="mk">—</span><span>SPIRE atestigua el workload al iniciarse (imagen, namespace, nodo)</span></li>
+            <li><span class="mk">—</span><span>Emite un <strong>SVID</strong>: certificado X.509 de ~1 hora de vida</span></li>
+            <li><span class="mk">—</span><span>Renovación <strong>automática</strong>. Sin credenciales estáticas ni rotación manual.</span></li>
+            <li><span class="mk">—</span><span>Aplicable a microservicios, jobs CI/CD y agentes de IA</span></li>
+          </ul>
+        </div>
+        <div>
+          <p class="col-t">mTLS &mdash; Autenticación mutua</p>
+          <ul class="items">
+            <li><span class="mk">—</span><span>Ambas partes presentan certificados: servidor <strong>y</strong> cliente</span></li>
+            <li><span class="mk">—</span><span>Cifra el tráfico <strong>este-oeste</strong> dentro del clúster</span></li>
+            <li><span class="mk">—</span><span>Gestionado automáticamente por el service mesh (Istio)</span></li>
+            <li><span class="mk">—</span><span>Overhead: <strong>&lt; 2 ms</strong> con Envoy y conexiones persistentes</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section class="sec" id="autorizacion">
+      <div class="sec-header">
+        <span class="sec-num">06</span>
+        <h2>Autorización &mdash; OAuth 2.0 / OIDC y Open Policy Agent</h2>
+      </div>
+
+      <div class="cols">
+        <div>
+          <p class="col-t">Identidad humana</p>
+          <ul class="items">
+            <li><span class="mk">—</span><span><strong>OAuth 2.0</strong>: tokens JWT emitidos por el IdP; acceso limitado sin exponer credenciales</span></li>
+            <li><span class="mk">—</span><span><strong>OIDC</strong>: capa de identidad y SSO; claims propagados entre servicios</span></li>
+            <li><span class="mk">—</span><span>Flujo en producción: API Gateway &rarr; OIDC &rarr; JWT &rarr; mTLS interno</span></li>
+          </ul>
+        </div>
+        <div>
+          <p class="col-t">OPA &mdash; Policy as Code</p>
+          <ul class="items">
+            <li><span class="mk">—</span><span>Políticas en <strong>Rego</strong>, externas al código del servicio</span></li>
+            <li><span class="mk">—</span><span>Actualizables <strong>sin redesplegar</strong> los microservicios</span></li>
+            <li><span class="mk">—</span><span>Integración con Envoy vía External Authorization Filter</span></li>
+            <li><span class="mk">—</span><span>Versionables, testeables y auditables en CI/CD</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section class="sec" id="infraestructura">
+      <div class="sec-header">
+        <span class="sec-num">07</span>
+        <h2>Service mesh, microsegmentación y secretos efímeros</h2>
+      </div>
+
+      <div class="cols">
+        <div>
+          <p class="col-t">Istio / Envoy &mdash; PEP universal</p>
+          <ul class="items">
+            <li><span class="mk">—</span><span>Envoy como <strong>sidecar</strong> junto a cada pod; intercepta todo el tráfico</span></li>
+            <li><span class="mk">—</span><span>Impone mTLS, valida SVIDs, delega decisión a OPA</span></li>
+            <li><span class="mk">—</span><span><strong>Network Policies</strong>: deny all por defecto; solo tráfico explícitamente permitido</span></li>
+          </ul>
+
+          <p class="col-t" style="margin-top:24px">HashiCorp Vault &mdash; Secretos efímeros</p>
+          <ul class="items">
+            <li><span class="mk">—</span><span>Pod se autentica ante Vault con su <strong>SVID</strong>; sin contraseña estática</span></li>
+            <li><span class="mk">—</span><span>Vault emite credenciales <strong>dinámicas</strong> con TTL corto (~15 min)</span></li>
+            <li><span class="mk">—</span><span>Renovación automática: cero credenciales estáticas en el sistema</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="diagram" style="height:100%;margin:0">Pod inicia
+  │
+  ├─▶ SPIRE emite SVID
+  │
+  ├─▶ SVID autentica ante Vault
+  │     └─▶ Vault emite
+  │         creds. dinámicas
+  │
+  ├─▶ Envoy sidecar
+  │     ├─▶ mTLS con peers
+  │     └─▶ OPA: Allow/Deny
+  │
+  └─▶ NetworkPolicy:
+        solo tráfico
+        explícitamente
+        permitido</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section class="sec" id="devsecops">
+      <div class="sec-header">
+        <span class="sec-num">08</span>
+        <h2>DevSecOps y desafíos de implementación</h2>
+      </div>
+
+      <div class="flow">
+        <div class="flow-col">
+          <div class="flow-ph">Desarrollo</div>
+          <div class="flow-items">SAST<br>Secrets scanning<br>Commits firmados</div>
+        </div>
+        <div class="flow-col">
+          <div class="flow-ph">Build (CI)</div>
+          <div class="flow-items">Escaneo de imágenes<br>Firma con Cosign<br>Creds. efímeras CI</div>
+        </div>
+        <div class="flow-col">
+          <div class="flow-ph">Deploy (CD)</div>
+          <div class="flow-items">Admission controllers<br>Verificación firmas<br>Privilegio mínimo</div>
+        </div>
+        <div class="flow-col">
+          <div class="flow-ph">Runtime</div>
+          <div class="flow-items">mTLS &middot; OPA<br>Network Policies<br>Rotación secretos</div>
+        </div>
+      </div>
+
+      <ul class="items" style="margin-top:24px">
+        <li><span class="mk">!</span><span><strong>Complejidad</strong>: integrar SPIRE + IdP + service mesh + OPA + Vault + observabilidad de forma coherente</span></li>
+        <li><span class="mk">!</span><span><strong>Auditoría</strong>: solo el 50% de las implementaciones tienen trazabilidad robusta (PMC, Sensors 2025)</span></li>
+        <li><span class="mk">!</span><span><strong>Configuración</strong>: <em>deny all by default</em> requiere mapeo exhaustivo previo de todas las comunicaciones</span></li>
+        <li><span class="mk">!</span><span><strong>Costo</strong>: las organizaciones subestiman el mantenimiento continuo de políticas y controles (Wiley, 2025)</span></li>
+      </ul>
+    </section>
+
+    <!-- 09 -->
+    <section class="sec" id="conclusiones">
+      <div class="sec-header">
+        <span class="sec-num">09</span>
+        <h2>Conclusiones</h2>
+      </div>
+
+      <ul class="conclusion-list">
+        <li><span class="c-mark">—</span><span>La confianza implícita por ubicación de red <strong>ya no es viable</strong> en sistemas distribuidos cloud-nativos</span></li>
+        <li><span class="c-mark">—</span><span>La <strong>identidad</strong> &mdash; humana y de workload &mdash; es el nuevo perímetro de seguridad</span></li>
+        <li><span class="c-mark">—</span><span>La seguridad es un atributo <strong>transversal y sistémico</strong>: cada capa asume que la anterior puede estar comprometida</span></li>
+        <li><span class="c-mark">—</span><span>La implementación es <strong>incremental</strong>: mapear &rarr; SPIFFE &rarr; mTLS &rarr; OPA &rarr; monitoreo &rarr; Vault &rarr; DevSecOps</span></li>
+        <li><span class="c-mark">—</span><span>El costo de <strong>no implementar</strong> ZTA supera al de implementarlo: USD 4,44M de costo promedio por brecha (IBM, 2025)</span></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="f-name">Ariel Antinori</p>
+    <p class="f-role">Universidad Nacional del Nordeste &middot; Ingeniería del SW 2 &middot; Junio 2026</p>
+    <a href="mailto:ariel.antinori@comunidad.unne.edu.ar">ariel.antinori@comunidad.unne.edu.ar</a>
+  </footer>
+
+</div><!-- .wrap -->
+</body>
+</html>
