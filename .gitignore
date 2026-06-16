@@ -1,0 +1,40 @@
+# ── LaTeX build artifacts ─────────────────────────────────────────────────────
+*.aux
+*.log
+*.toc
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+# Descomentar para ignorar PDFs generados localmente:
+# *.pdf
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# ── Editores ──────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*~
+*.swo
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Wrangler / Cloudflare ─────────────────────────────────────────────────────
+.wrangler/

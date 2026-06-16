@@ -1,0 +1,36 @@
+# Cloudflare Pages — HTTP Headers
+# https://developers.cloudflare.com/pages/platform/headers/
+
+# ── Seguridad global ──────────────────────────────────────────────────────────
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+# ── HTML — caché corta (contenido puede actualizarse) ─────────────────────────
+/index.html
+  Cache-Control: public, max-age=300, stale-while-revalidate=3600
+  Content-Type: text/html; charset=utf-8
+
+/presentacion.html
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Content-Type: text/html; charset=utf-8
+
+# ── Descargas — tipo MIME correcto + forzar descarga ─────────────────────────
+/downloads/zero_trust_arquitectura_confianza_cero.md
+  Content-Type: text/markdown; charset=utf-8
+  Content-Disposition: attachment; filename="zero_trust_arquitectura_confianza_cero.md"
+  Cache-Control: public, max-age=86400
+
+/downloads/presentacion.md
+  Content-Type: text/markdown; charset=utf-8
+  Content-Disposition: attachment; filename="presentacion.md"
+  Cache-Control: public, max-age=86400
+
+/downloads/zero_trust_paper.tex
+  Content-Type: application/x-tex; charset=utf-8
+  Content-Disposition: attachment; filename="zero_trust_paper.tex"
+  Cache-Control: public, max-age=86400

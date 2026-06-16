@@ -1,0 +1,11 @@
+name = "zta-unne-is2"
+pages_build_output_dir = "public"
+
+# Para deployar manualmente:
+#   wrangler pages deploy public --project-name=zta-unne-is2
+#
+# Para configurar el proyecto en Cloudflare Pages (dashboard):
+#   Build command:        (vacío — sin build step)
+#   Build output dir:     public
+#   Root directory:       /
+#   Environment vars:     (ninguna)

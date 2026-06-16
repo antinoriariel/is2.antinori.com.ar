@@ -1,0 +1,13 @@
+# Cloudflare Pages — URL Redirects
+# https://developers.cloudflare.com/pages/platform/redirects/
+# Formato: <origen> <destino> [código]
+
+# Alias de conveniencia para la presentación
+/slides            /presentacion.html    301
+/diapositivas      /presentacion.html    301
+/presentacion      /presentacion.html    301
+
+# Alias de conveniencia para descargas
+/paper             /downloads/zero_trust_paper.tex                         301
+/md                /downloads/zero_trust_arquitectura_confianza_cero.md    301
+/fuente            /downloads/zero_trust_arquitectura_confianza_cero.md    301
