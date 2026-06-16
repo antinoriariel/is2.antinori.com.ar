@@ -3,879 +3,712 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ZTA — Zero Trust Architecture | UNNE IS2 2026 | Ariel Antinori</title>
+  <title>Zero Trust Architecture · UNNE IS2 · Ariel Antinori</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
   <style>
-    :root {
-      --bg-deep:    #06101e;
-      --bg-card:    #0a1628;
-      --bg-darker:  #071020;
-      --accent1:    #38bdf8;
-      --accent2:    #7dd3fc;
-      --accent3:    #93c5fd;
-      --gold:       #fbbf24;
-      --green:      #6ee7b7;
-      --text:       #e2eaf4;
-      --text-muted: #94a3b8;
-      --border:     #1e3a5f;
+    /* ── Base ── */
+    html, body {
+      margin: 0; padding: 0;
+      width: 100%; height: 100%;
+      background: #fff;
+      overflow: hidden;
     }
 
-    .reveal-viewport { background: var(--bg-deep); }
+    .reveal-viewport { background: #fff; }
 
     .reveal {
-      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-      font-size: 28px;
-      color: var(--text);
+      font-family: 'Merriweather', Georgia, serif;
+      background: #fff;
+      color: #111;
     }
 
+    /* ── Slide base: ocupa el 100% del canvas ── */
     .reveal .slides section {
-      background: transparent;
+      background: #fff;
+      color: #111;
       text-align: left;
-      padding: 0 10px;
-    }
-
-    /* ── Title slide ── */
-    .reveal .slides section.title-slide {
-      text-align: center;
-      padding: 20px;
-    }
-    .reveal .slides section.title-slide h1 {
-      font-size: 1.5em;
-      color: var(--accent1);
-      margin-bottom: 0.15em;
-      text-shadow: 0 0 40px rgba(56,189,248,0.3);
-    }
-    .reveal .slides section.title-slide h2 {
-      font-size: 1em;
-      color: var(--accent2);
-      font-style: italic;
-      font-weight: 400;
-      margin-bottom: 0.8em;
-      border: none;
-    }
-    .title-meta {
-      font-size: 0.55em;
-      color: var(--text-muted);
-      margin-top: 1.5em;
-      line-height: 2;
-    }
-    .title-meta strong { color: var(--accent2); }
-    .title-badge {
-      display: inline-block;
-      background: rgba(56,189,248,0.15);
-      border: 1px solid var(--accent1);
-      color: var(--accent1);
-      border-radius: 20px;
-      padding: 4px 16px;
-      font-size: 0.6em;
-      margin: 6px 3px;
-    }
-    .title-subtitle {
-      font-size: 0.6em;
-      color: var(--text-muted);
-      margin: 0.5em 0 1em;
-      line-height: 1.6;
-    }
-
-    /* ── Headings ── */
-    .reveal h2 {
-      font-size: 1em;
-      color: var(--accent2);
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 10px;
-      margin-bottom: 0.5em;
-    }
-    .reveal h3 {
-      font-size: 0.75em;
-      color: var(--accent3);
-      margin-top: 0.4em;
-      margin-bottom: 0.3em;
-    }
-
-    /* ── Text ── */
-    .reveal p { line-height: 1.5; margin-bottom: 0.5em; }
-    .reveal strong { color: var(--gold); }
-    .reveal em { color: var(--green); font-style: italic; }
-    .reveal a { color: var(--accent1); }
-
-    /* ── Lists ── */
-    .reveal ul, .reveal ol {
-      font-size: 0.8em;
-      line-height: 1.6;
-      padding-left: 1.2em;
-    }
-    .reveal li { margin-bottom: 0.25em; }
-    .reveal ul li::marker { color: var(--accent1); }
-
-    /* ── Blockquote ── */
-    .reveal blockquote {
-      background: rgba(56,189,248,0.08);
-      border-left: 4px solid var(--accent1);
-      padding: 12px 18px;
-      margin: 0.8em 0;
-      border-radius: 0 6px 6px 0;
-      font-style: italic;
-      color: #bfdbfe;
-      font-size: 0.78em;
-      width: auto;
-      box-shadow: none;
-    }
-
-    /* ── Code ── */
-    .reveal code {
-      background: rgba(15,32,53,0.9);
-      color: var(--accent2);
-      border: 1px solid var(--border);
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-size: 0.82em;
-    }
-    .reveal pre {
-      background: #071828;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px 18px;
-      font-size: 0.6em;
-      line-height: 1.5;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-      width: 100%;
-      margin: 0.5em 0;
-    }
-    .reveal pre code {
-      background: transparent;
-      border: none;
       padding: 0;
-      color: #a5f3fc;
-      font-size: 1em;
+      top: 0 !important;
+      height: 100%;
     }
 
-    /* ── Tables ── */
-    .reveal table {
-      font-size: 0.65em;
-      border-collapse: collapse;
+    /* ── Contenedor interno de cada slide ── */
+    .slide {
       width: 100%;
-      margin: 0.5em 0;
-    }
-    .reveal thead th {
-      background: #0f2a4a;
-      color: var(--accent2);
-      padding: 8px 12px;
-      text-align: left;
-      border-bottom: 2px solid var(--border);
-      font-weight: 600;
-    }
-    .reveal tbody td {
-      padding: 7px 12px;
-      border-bottom: 1px solid rgba(30,58,95,0.5);
-      color: var(--text);
-    }
-    .reveal tbody tr:nth-child(even) td { background: rgba(255,255,255,0.025); }
-    .reveal tbody tr:hover td { background: rgba(56,189,248,0.06); }
-
-    /* ── Cards / Highlights ── */
-    .card-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 0.5em;
-    }
-    .card {
-      background: rgba(14,30,52,0.8);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px 16px;
-      font-size: 0.62em;
-    }
-    .card h4 { color: var(--accent1); margin: 0 0 6px; font-size: 1.1em; }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin: 0.8em 0;
-    }
-    .stat {
-      background: rgba(14,30,52,0.9);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px 12px;
-      text-align: center;
-    }
-    .stat-num { font-size: 1.3em; font-weight: 700; color: var(--gold); display: block; }
-    .stat-label { font-size: 0.52em; color: var(--text-muted); margin-top: 4px; }
-
-    .highlight-box {
-      background: rgba(56,189,248,0.08);
-      border: 1px solid rgba(56,189,248,0.3);
-      border-radius: 8px;
-      padding: 14px 18px;
-      margin: 0.5em 0;
-      font-size: 0.72em;
-    }
-
-    .flow-step {
+      height: 100%;
       display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin: 6px 0;
-      font-size: 0.68em;
+      flex-direction: column;
+      padding: 56px 80px;
+      box-sizing: border-box;
     }
-    .step-num {
-      background: var(--accent1);
-      color: var(--bg-deep);
-      border-radius: 50%;
-      width: 22px;
-      height: 22px;
-      display: flex;
-      align-items: center;
+
+    /* ── Slide de portada (centrada) ── */
+    .slide-cover {
       justify-content: center;
-      font-weight: 700;
-      font-size: 0.85em;
+      align-items: flex-start;
+      border-left: 5px solid #111;
+      padding-left: 60px;
+    }
+
+    /* ── Slides de contenido ── */
+    .slide-content {
+      justify-content: space-between;
+    }
+
+    /* ── Encabezado de slide ── */
+    .slide-header {
+      flex-shrink: 0;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #111;
+      margin-bottom: 36px;
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+    }
+
+    .slide-num {
+      font-size: 0.65rem;
+      font-weight: 300;
+      color: #aaa;
+      letter-spacing: 0.15em;
       flex-shrink: 0;
     }
 
-    /* ── Slide counter & footer ── */
-    .reveal .slide-number {
-      background: rgba(10,22,40,0.8);
-      color: var(--text-muted);
-      border-radius: 4px;
-      font-size: 0.5em;
-      right: 12px;
-      bottom: 12px;
-    }
-    .slide-footer {
-      position: absolute;
-      bottom: 14px;
-      left: 20px;
-      font-size: 0.4em;
-      color: #334155;
+    .slide-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
     }
 
-    /* ── Lead slide ── */
-    .lead-slide {
-      text-align: center;
-      padding: 30px 20px !important;
-    }
-    .lead-slide h2 {
-      font-size: 1.3em;
-      color: var(--accent1);
-      border: none;
-      margin-bottom: 0.3em;
-    }
-
-    /* ── Conclusion checks ── */
-    .check-item {
+    /* ── Cuerpo de slide ── */
+    .slide-body {
+      flex: 1;
       display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin: 8px 0;
-      font-size: 0.72em;
+      flex-direction: column;
+      justify-content: center;
     }
-    .check-icon { color: var(--green); font-size: 1.1em; flex-shrink: 0; }
 
-    /* ── Progress bar ── */
-    .reveal .progress { background: rgba(56,189,248,0.2); }
-    .reveal .progress span { background: var(--accent1); }
+    /* ── Tipografía ── */
+    .reveal h1 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1.1;
+      color: #111;
+      margin-bottom: 14px;
+    }
 
-    /* ── Controls ── */
-    .reveal .controls { color: var(--accent1); }
+    .reveal h3 {
+      font-size: 0.75rem;
+      font-weight: 300;
+      font-style: italic;
+      color: #555;
+      margin-bottom: 40px;
+      letter-spacing: 0.04em;
+    }
 
-    /* ── Fragment animations ── */
-    .reveal .fragment { opacity: 0.2; }
-    .reveal .fragment.visible { opacity: 1; }
+    .cover-meta {
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: #888;
+      line-height: 2;
+      letter-spacing: 0.04em;
+    }
+
+    .cover-meta strong { color: #111; font-weight: 700; }
+
+    /* ── Listas ── */
+    .reveal ul, .reveal ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .reveal li {
+      font-size: 0.88rem;
+      font-weight: 400;
+      line-height: 1.65;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      gap: 16px;
+      align-items: baseline;
+    }
+
+    .reveal li:last-child { border-bottom: none; }
+
+    .reveal li .marker {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: #aaa;
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+      padding-top: 3px;
+    }
+
+    .reveal li strong { font-weight: 700; }
+    .reveal li em { font-style: italic; color: #444; }
+
+    /* ── Cita ── */
+    .quote-block {
+      border-left: 4px solid #111;
+      padding: 20px 28px;
+      margin: 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .quote-block blockquote {
+      font-size: 1.25rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.55;
+      color: #111;
+      margin-bottom: 20px;
+    }
+
+    .quote-block cite {
+      font-size: 0.68rem;
+      font-weight: 400;
+      color: #888;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-style: normal;
+    }
+
+    /* ── Dos columnas ── */
+    .cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      flex: 1;
+    }
+
+    .col-title {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    /* ── Tabla de principios ── */
+    .principles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      flex: 1;
+    }
+
+    .principle {
+      padding: 16px 20px;
+      border-bottom: 1px solid #eee;
+      border-right: 1px solid #eee;
+    }
+
+    .principle:nth-child(even) { border-right: none; }
+    .principle:nth-last-child(-n+2) { border-bottom: none; }
+
+    .p-num {
+      font-size: 0.58rem;
+      font-weight: 700;
+      color: #bbb;
+      letter-spacing: 0.15em;
+      margin-bottom: 6px;
+    }
+
+    .p-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .p-desc {
+      font-size: 0.68rem;
+      font-weight: 300;
+      font-style: italic;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    /* ── Diagrama PEP/PDP/PA ── */
+    .arch-diagram {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.72rem;
+      line-height: 1.7;
+      color: #333;
+      background: #f8f8f8;
+      border: 1px solid #ddd;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      white-space: pre;
+    }
+
+    .arch-legend {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .leg-item .leg-key {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+
+    .leg-item .leg-val {
+      font-size: 0.7rem;
+      font-weight: 300;
+      font-style: italic;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    /* ── Flujo ── */
+    .flow {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      flex: 1;
+      border: 1px solid #ddd;
+    }
+
+    .flow-step {
+      flex: 1;
+      padding: 20px 18px;
+      border-right: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .flow-step:last-child { border-right: none; }
+
+    .flow-phase {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 12px;
+    }
+
+    .flow-items {
+      font-size: 0.68rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: #333;
+      font-style: italic;
+    }
+
+    /* ── Stats ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    .stat {
+      padding: 20px;
+      border: 1px solid #111;
+      text-align: center;
+    }
+
+    .stat-n {
+      font-size: 1.6rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-l {
+      font-size: 0.62rem;
+      font-weight: 300;
+      font-style: italic;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    /* ── Slide de cierre ── */
+    .slide-end {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .end-title {
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 16px;
+      border-bottom: 3px solid #111;
+      padding-bottom: 20px;
+    }
+
+    .end-contact {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: #555;
+      line-height: 2.2;
+      margin-top: 20px;
+    }
+
+    .end-contact a { color: #111; text-decoration: underline; text-underline-offset: 3px; }
+    .end-contact strong { font-weight: 700; color: #111; }
+
+    /* ── Navegación ── */
+    .reveal .controls { color: #111; }
+    .reveal .progress { background: #ddd; height: 2px; }
+    .reveal .progress span { background: #111; }
+    .reveal .slide-number {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 0.6rem;
+      color: #aaa;
+      background: transparent;
+      right: 20px; bottom: 16px;
+    }
   </style>
 </head>
 <body>
 <div class="reveal">
 <div class="slides">
 
-<!-- ══════════════ SLIDE 1: Portada ══════════════ -->
-<section class="title-slide">
-  <h1>Arquitectura de Confianza Cero</h1>
-  <h2><em>Zero Trust Architecture (ZTA)</em></h2>
-  <p class="title-subtitle">
-    Diseño de software bajo la premisa de <strong>red comprometida</strong><br>
-    Autenticación y autorización granular en microservicios
-  </p>
-  <div>
-    <span class="title-badge">ZTA</span>
-    <span class="title-badge">Microservicios</span>
-    <span class="title-badge">mTLS · SPIFFE · OPA</span>
-    <span class="title-badge">DevSecOps</span>
-  </div>
-  <p class="title-meta">
-    <strong>Ariel Antinori</strong><br>
-    Universidad Nacional del Nordeste — Ingeniería del SW 2<br>
-    Junio 2026
-  </p>
-</section>
-
-<!-- ══════════════ SLIDE 2: Agenda ══════════════ -->
+<!-- ══ 01 PORTADA ══ -->
 <section>
-  <h2>Agenda</h2>
-  <div class="card-grid">
-    <div class="card">
-      <h4>Problema y contexto</h4>
-      <ol style="margin:0;padding-left:1.2em">
-        <li>Seguridad perimetral y sus fallas</li>
-        <li>¿Qué es Zero Trust Architecture?</li>
-        <li>Evolución histórica (1994–2025)</li>
-        <li>Principios — NIST SP 800-207</li>
-        <li>Componentes: PEP, PDP, PA</li>
-      </ol>
-    </div>
-    <div class="card">
-      <h4>Implementación técnica</h4>
-      <ol start="6" style="margin:0;padding-left:1.2em">
-        <li>Identidad: SPIFFE / SPIRE</li>
-        <li>mTLS · OAuth 2.0 · OIDC · OPA</li>
-        <li>Service Mesh: Istio y Envoy</li>
-        <li>Microsegmentación y secretos</li>
-        <li>DevSecOps, desafíos y tendencias</li>
-      </ol>
+  <div class="slide slide-cover">
+    <p style="font-size:0.65rem;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:#aaa;margin-bottom:36px">
+      Universidad Nacional del Nordeste &middot; Ingeniería del SW 2 &middot; 2026
+    </p>
+    <h1>Arquitectura de<br>Confianza Cero</h1>
+    <h3>Zero Trust Architecture (ZTA) en el desarrollo de microservicios</h3>
+    <div class="cover-meta">
+      <strong>Ariel Antinori</strong><br>
+      ariel.antinori@comunidad.unne.edu.ar<br>
+      Junio 2026
     </div>
   </div>
 </section>
 
-<!-- ══════════════ SLIDE 3: El Problema ══════════════ -->
+<!-- ══ 02 EL PROBLEMA ══ -->
 <section>
-  <h2>El Modelo <em>Castle-and-Moat</em> 🏰</h2>
-  <blockquote>
-    "Todo tráfico interno a la red corporativa es inherentemente confiable."<br>
-    — Paradigma de seguridad perimetral tradicional
-  </blockquote>
-  <h3>La premisa rota</h3>
-  <ul>
-    <li>🔓 Un atacante que traspasa el perímetro obtiene <strong>acceso irrestricto</strong></li>
-    <li>➡️ Movimiento lateral <strong>sin obstáculos</strong> hacia servicios críticos</li>
-    <li>🌐 La VPN es el único control de acceso real</li>
-    <li>🔍 Tráfico inter-servicio sin cifrar, sin autenticar, sin autorizar</li>
-    <li>👥 Amenazas internas con acceso amplio e irrestricto</li>
-  </ul>
-  <div class="highlight-box" style="margin-top:0.8em">
-    <strong>Conclusión:</strong> cuando el perímetro falla, <strong>todo falla</strong>.
-  </div>
-</section>
-
-<!-- ══════════════ SLIDE 4: Realidad Microservicios ══════════════ -->
-<section>
-  <h2>La Realidad de las Arquitecturas Modernas</h2>
-  <p style="font-size:0.72em;margin-bottom:0.6em">
-    En entornos cloud-nativos, la frontera <em>"interno = confiable"</em> <strong>no existe</strong>.
-  </p>
-  <table>
-    <thead><tr><th>Problema estructural</th><th>Consecuencia en seguridad</th></tr></thead>
-    <tbody>
-      <tr><td>Decenas/cientos de microservicios</td><td>Superficie de ataque masiva</td></tr>
-      <tr><td>Tráfico este-oeste sin inspección</td><td>Credenciales en texto plano</td></tr>
-      <tr><td>IPs efímeras en Kubernetes</td><td>Identidades de red no confiables</td></tr>
-      <tr><td>Pods creados y destruidos dinámicamente</td><td>Autenticación por IP imposible</td></tr>
-      <tr><td>Amenazas internas con acceso válido</td><td>Exfiltración sin detección</td></tr>
-    </tbody>
-  </table>
-  <blockquote>
-    Hallazgo en producción: tráfico de <strong>pago y credenciales</strong> de usuarios
-    fluyendo en texto plano entre servicios del mismo clúster — DZone, 2025
-  </blockquote>
-</section>
-
-<!-- ══════════════ SLIDE 5: Datos Alarmantes ══════════════ -->
-<section>
-  <h2>La Amenaza en Números</h2>
-  <div class="stat-grid">
-    <div class="stat">
-      <span class="stat-num">+321%</span>
-      <div class="stat-label">Aumento de brechas<br>en APIs (2024)</div>
+  <div class="slide slide-content">
+    <div class="slide-header">
+      <span class="slide-num">02 / 10</span>
+      <h2>El paradigma perimetral y sus fallas</h2>
     </div>
-    <div class="stat">
-      <span class="stat-num">68%</span>
-      <div class="stat-label">Incidentes API por<br>autorización inadecuada</div>
-    </div>
-    <div class="stat">
-      <span class="stat-num">89%</span>
-      <div class="stat-label">Organizaciones con<br>incidentes en K8s</div>
-    </div>
-    <div class="stat">
-      <span class="stat-num">$4.44M</span>
-      <div class="stat-label">Costo promedio<br>de una brecha (IBM 2025)</div>
-    </div>
-  </div>
-  <p style="font-size:0.55em;color:#64748b;margin-top:0.5em">
-    Fuentes: Markaicode (2025), Groundcover (2026), IBM Cost of a Data Breach 2025
-  </p>
-</section>
-
-<!-- ══════════════ SLIDE 6: ¿Qué es ZTA? ══════════════ -->
-<section>
-  <h2>¿Qué es Zero Trust Architecture?</h2>
-  <blockquote>
-    "Ninguna entidad — usuario, dispositivo, servicio o segmento de red —
-    debe recibir confianza implícita por su ubicación."
-    <br><em>— NIST SP 800-207, 2020</em>
-  </blockquote>
-  <h3>Premisa central: <strong>Nunca confiar. Siempre verificar.</strong></h3>
-  <div class="card-grid">
-    <div class="card">
-      <h4>🔐 Verificar</h4>
-      Identidad explícita comprobada en <strong>cada solicitud</strong>, independientemente de la red.
-    </div>
-    <div class="card">
-      <h4>🎯 Autorizar</h4>
-      <strong>Mínimo privilegio</strong> por sesión. Solo lo necesario, solo cuando es necesario.
-    </div>
-    <div class="card">
-      <h4>👁️ Monitorear</h4>
-      Supervisión <strong>continua</strong> del comportamiento e integridad de cada entidad.
-    </div>
-    <div class="card">
-      <h4>⚠️ Asumir brecha</h4>
-      Diseño orientado a <strong>contener el daño</strong>, no solo a prevenir la intrusión.
+    <div class="slide-body">
+      <ul>
+        <li><span class="marker">—</span><span>El modelo <strong>castle-and-moat</strong> asumía que todo tráfico interno era confiable</span></li>
+        <li><span class="marker">—</span><span>Un atacante que traspasa el perímetro obtiene <strong>acceso irrestricto</strong> y puede moverse lateralmente sin obstáculos</span></li>
+        <li><span class="marker">—</span><span>En microservicios, el tráfico <em>este-oeste</em> entre servicios fluye <strong>sin cifrar, sin autenticar</strong></span></li>
+        <li><span class="marker">—</span><span>Las identidades de red (IPs) en Kubernetes son <strong>efímeras</strong> y no confiables</span></li>
+      </ul>
+      <div class="stats-row">
+        <div class="stat">
+          <div class="stat-n">+321%</div>
+          <div class="stat-l">Brechas en APIs<br>en 2024</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">89%</div>
+          <div class="stat-l">Organizaciones con<br>incidentes en Kubernetes</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">$4.44M</div>
+          <div class="stat-l">Costo promedio<br>de una brecha (IBM 2025)</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════ SLIDE 7: Historia ══════════════ -->
+<!-- ══ 03 QUÉ ES ZTA ══ -->
 <section>
-  <h2>Evolución Histórica (1994–2025)</h2>
-  <table>
-    <thead><tr><th>Año</th><th>Hito</th></tr></thead>
-    <tbody>
-      <tr><td><strong>1994</strong></td><td>Marsh: bases filosóficas de confianza computacional</td></tr>
-      <tr><td><strong>2003</strong></td><td>Jericho Forum: <em>de-perimeterización</em></td></tr>
-      <tr><td><strong>2010</strong></td><td>Kindervag (Forrester): acuña formalmente "Zero Trust"</td></tr>
-      <tr><td><strong>2014</strong></td><td>Google BeyondCorp publicado — validación a escala industrial</td></tr>
-      <tr><td><strong>2020</strong></td><td>NIST SP 800-207 — marco normativo global</td></tr>
-      <tr><td><strong>2021</strong></td><td>EO 14028 — mandato federal EE.UU. para todas las agencias</td></tr>
-      <tr><td><strong>2023</strong></td><td>NIST SP 800-207A — cloud-nativas y multi-nube</td></tr>
-      <tr><td><strong>2025</strong></td><td>ETSI TS 104 102 — estándar europeo (ZT-Kipling)</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ══════════════ SLIDE 8: Principios ══════════════ -->
-<section>
-  <h2>Los 7 Principios — NIST SP 800-207</h2>
-  <table>
-    <thead><tr><th>#</th><th>Principio</th><th>Núcleo de la idea</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td><strong>Nunca confiar, siempre verificar</strong></td><td>Sin confianza implícita por ubicación de red</td></tr>
-      <tr><td>2</td><td><strong>Mínimo privilegio</strong></td><td>Acceso acotado al tiempo y sesión mínimos</td></tr>
-      <tr><td>3</td><td><strong>Asumir la brecha</strong></td><td>Diseñar para contener el radio de daño</td></tr>
-      <tr><td>4</td><td><strong>Verificación continua</strong></td><td>Autenticación permanente, no solo al inicio</td></tr>
-      <tr><td>5</td><td><strong>Acceso por sesión</strong></td><td>Política dinámica por solicitud individual</td></tr>
-      <tr><td>6</td><td><strong>Recursos como externos</strong></td><td>Sin distinción entre red interna y externa</td></tr>
-      <tr><td>7</td><td><strong>Identidades consistentes</strong></td><td>Humanas <em>y</em> no humanas (workloads, CI/CD)</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ══════════════ SLIDE 9: PEP/PDP/PA ══════════════ -->
-<section>
-  <h2>Componentes del Modelo NIST: PEP · PDP · PA</h2>
-  <pre><code>  Cliente / Servicio A
-        │
-        ▼
-  ┌───────────┐   ¿Permitir esta solicitud?   ┌─────────────┐
-  │    PEP    │ ─────────────────────────────▶│     PDP     │
-  │  (Envoy)  │                               │    (OPA)    │
-  │  Proxy    │◀── Decisión: Allow / Deny ─── │    Rego     │
-  └─────┬─────┘                               └──────┬──────┘
-        │ (si Allow)                                 │
-        ▼                                      ┌─────┴──────┐
-   Servicio destino                            │     PA     │
-                                               │ (Políticas)│
-                                               └────────────┘</code></pre>
-  <div class="card-grid" style="margin-top:0.5em">
-    <div class="card"><h4>PEP</h4><em>Policy Enforcement Point</em><br>Envoy — intercepta todo el tráfico</div>
-    <div class="card"><h4>PDP</h4><em>Policy Decision Point</em><br>OPA — evalúa políticas y decide</div>
-    <div class="card"><h4>PA</h4><em>Policy Administrator</em><br>Gestiona el ciclo de vida de políticas</div>
-    <div class="card"><h4>Separación</h4>Autorización <strong>externa</strong> al código — consistencia y auditabilidad</div>
-  </div>
-</section>
-
-<!-- ══════════════ SLIDE 10: Identidad ══════════════ -->
-<section>
-  <h2>Identidad como Nuevo Perímetro</h2>
-  <p style="font-size:0.72em">
-    <strong>La identidad reemplaza a la ubicación de red</strong> como base del control de acceso.
-  </p>
-  <div class="card-grid">
-    <div class="card">
-      <h4>👤 Identidad Humana</h4>
-      Usuarios finales y administradores.<br><br>
-      Protocolos: <strong>OAuth 2.0</strong> y <strong>OpenID Connect (OIDC)</strong>.<br>
-      Tokens JWT propagados entre servicios.
+  <div class="slide slide-content">
+    <div class="slide-header">
+      <span class="slide-num">03 / 10</span>
+      <h2>Zero Trust Architecture</h2>
     </div>
-    <div class="card">
-      <h4>⚙️ Identidad de Workload</h4>
-      Microservicios, funciones serverless, jobs CI/CD, agentes de IA.<br><br>
-      Estándar: <strong>SPIFFE / SPIRE</strong>.<br>
-      Certificados X.509 de corta vida (SVID).
-    </div>
-  </div>
-  <blockquote>
-    En Kubernetes, una dirección IP que perteneció a un servicio legítimo
-    puede <strong>reasignarse en segundos</strong> a otro pod.
-    Las IPs no son identidades confiables.
-  </blockquote>
-</section>
-
-<!-- ══════════════ SLIDE 11: SPIFFE/SPIRE ══════════════ -->
-<section>
-  <h2>SPIFFE y SPIRE — Identidad de Workload</h2>
-  <p style="font-size:0.65em"><strong>SPIFFE</strong>: <em>Secure Production Identity Framework For Everyone</em> · <strong>SPIRE</strong>: implementación de referencia (CNCF)</p>
-  <h3>Flujo de atestación y emisión de SVID:</h3>
-  <div>
-    <div class="flow-step"><div class="step-num">1</div><div>Workload/Pod se inicia en el clúster</div></div>
-    <div class="flow-step"><div class="step-num">2</div><div>SPIRE realiza <strong>atestación</strong>: verifica nombre del pod, imagen de contenedor, namespace, nodo</div></div>
-    <div class="flow-step"><div class="step-num">3</div><div>Emite un <strong>SVID</strong> <em>(SPIFFE Verifiable Identity Document)</em>: certificado X.509 con TTL ≈ 1 hora</div></div>
-    <div class="flow-step"><div class="step-num">4</div><div>El SVID se renueva <strong>automáticamente</strong> — sin intervención manual, sin credenciales estáticas</div></div>
-    <div class="flow-step"><div class="step-num">5</div><div>El SVID habilita <strong>mTLS</strong> entre servicios y autenticación ante Vault</div></div>
-  </div>
-  <div class="highlight-box">
-    ✅ Sin credenciales hardcodeadas &nbsp;·&nbsp; ✅ Sin rotación manual &nbsp;·&nbsp; ✅ Rastro auditable completo
-  </div>
-</section>
-
-<!-- ══════════════ SLIDE 12: mTLS ══════════════ -->
-<section>
-  <h2>mTLS — Autenticación Mutua entre Servicios</h2>
-  <table>
-    <thead><tr><th>Aspecto</th><th>TLS estándar</th><th>mTLS</th></tr></thead>
-    <tbody>
-      <tr><td>¿Quién se autentica?</td><td>Solo el servidor</td><td><strong>Ambas partes</strong></td></tr>
-      <tr><td>Tráfico cifrado</td><td>Norte-Sur</td><td><strong>Norte-Sur + Este-Oeste</strong></td></tr>
-      <tr><td>Gestión de certificados</td><td>Manual/parcial</td><td><strong>Automática (service mesh)</strong></td></tr>
-      <tr><td>Overhead de latencia</td><td>—</td><td><strong>&lt; 2 ms</strong> con conexiones persistentes</td></tr>
-    </tbody>
-  </table>
-  <h3>Garantías de mTLS:</h3>
-  <ul style="font-size:0.72em">
-    <li>Cada solicitud entre servicios está <strong>cifrada en tránsito</strong></li>
-    <li>Cada servicio <strong>verifica criptográficamente</strong> la identidad del caller</li>
-    <li>Los certificados son gestionados automáticamente por el <strong>service mesh</strong></li>
-    <li><em>Nota:</em> mTLS autentica servicios, no usuarios — OAuth2/JWT para identidades humanas</li>
-  </ul>
-</section>
-
-<!-- ══════════════ SLIDE 13: OAuth2 / OIDC ══════════════ -->
-<section>
-  <h2>OAuth 2.0 y OpenID Connect</h2>
-  <div class="card-grid">
-    <div class="card">
-      <h4>OAuth 2.0</h4>
-      Framework de <strong>autorización</strong>.<br>
-      Tokens de acceso JWT emitidos por el IdP.<br>
-      Acceso limitado sin exponer credenciales.
-    </div>
-    <div class="card">
-      <h4>OpenID Connect (OIDC)</h4>
-      Capa de <strong>identidad</strong> sobre OAuth 2.0.<br>
-      SSO (<em>Single Sign-On</em>) entre servicios.<br>
-      Claims de identidad propagados por JWT.<br>
-      OIDC Federation 1.0: federación multi-dominio.
-    </div>
-  </div>
-  <h3>Arquitectura de producción moderna:</h3>
-  <pre><code>  Usuario ──▶ [API Gateway] ──▶ OAuth2/OIDC Validation
-                                       │
-                              JWT propagado a servicios
-                                       │
-                              [Servicio A] ─── mTLS ───▶ [Servicio B]
-                                       │               (SPIFFE/SPIRE)
-                                       ▼
-                                  [OPA] decide autorización</code></pre>
-</section>
-
-<!-- ══════════════ SLIDE 14: OPA ══════════════ -->
-<section>
-  <h2>Open Policy Agent — OPA</h2>
-  <p style="font-size:0.7em">Motor de políticas de <strong>código abierto</strong>. Desacopla la autorización del código de aplicación.</p>
-  <pre><code class="language-rego"># Política Rego: solo lectores pueden acceder a /api/docs/
-package authz.microservices
-
-default allow = false
-
-allow {
-    input.method == "GET"
-    input.user.roles[_] == "reader"
-    startswith(input.path, "/api/docs/")
-}
-
-# Pregunta compuesta: ¿Servicio A puede acceder a Recurso X en nombre de Usuario Y?
-allow {
-    service_authorized(input.source_service)
-    user_has_permission(input.user, input.resource)
-    within_session_scope(input.session)
-}</code></pre>
-  <div class="card-grid" style="margin-top:0.4em">
-    <div class="card">✅ Políticas <strong>externas</strong> al servicio — consistencia</div>
-    <div class="card">✅ Actualizables <strong>sin redesplegar</strong> servicios</div>
-    <div class="card">✅ Versionables y <strong>testeables</strong> como código</div>
-    <div class="card">✅ Integración nativa con <strong>Envoy External AuthZ</strong></div>
-  </div>
-</section>
-
-<!-- ══════════════ SLIDE 15: Istio/Envoy ══════════════ -->
-<section>
-  <h2>Service Mesh: Istio y Envoy</h2>
-  <div class="card-grid">
-    <div class="card">
-      <h4>Envoy como sidecar</h4>
-      Desplegado junto a <strong>cada pod</strong>.<br>
-      Intercepta todo el tráfico entrante y saliente.<br>
-      Actúa como <strong>PEP universal</strong>.
-    </div>
-    <div class="card">
-      <h4>Istio como plano de control</h4>
-      Gestiona la configuración de todos los sidecars.<br>
-      Distribuye <strong>políticas y certificados</strong>.<br>
-      Integra con SPIRE para identidad de workload.
-    </div>
-  </div>
-  <h3>Capacidades de Envoy en un contexto ZTA:</h3>
-  <table>
-    <thead><tr><th>Capacidad</th><th>Función Zero Trust</th></tr></thead>
-    <tbody>
-      <tr><td>mTLS automático</td><td>Cifrado y autenticación entre todos los servicios</td></tr>
-      <tr><td>Validación SVID</td><td>Verifica identidad SPIFFE del caller</td></tr>
-      <tr><td>External AuthZ</td><td>Delega decisión de autorización a OPA</td></tr>
-      <tr><td>Telemetría</td><td>Métricas, logs y trazas distribuidas</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ══════════════ SLIDE 16: Microsegmentación ══════════════ -->
-<section>
-  <h2>Microsegmentación</h2>
-  <p style="font-size:0.7em"><strong>Objetivo:</strong> contener el movimiento lateral tras cualquier brecha.</p>
-  <blockquote>
-    Analogía: puertas cortafuegos en un edificio — si una zona es comprometida,
-    la amenaza no puede propagarse libremente.
-  </blockquote>
-  <div class="card-grid">
-    <div class="card">
-      <h4>Kubernetes Network Policies</h4>
-      <pre style="font-size:0.8em;margin:6px 0"><code>spec:
-  podSelector: {}
-  policyTypes:
-    - Ingress
-    - Egress
-  # Sin reglas →
-  # DENIEGA TODO</code></pre>
-      <strong>Deny all</strong> por defecto.<br>
-      Permitir explícitamente solo lo necesario.
-    </div>
-    <div class="card">
-      <h4>Combinación con mTLS</h4>
-      <br>
-      Incluso si la <strong>Network Policy</strong> permite la comunicación entre dos pods,
-      <strong>mTLS</strong> garantiza autenticación mutua antes de intercambiar datos.<br><br>
-      <code>NetworkPolicy + mTLS = segmentación + autenticación</code>
+    <div class="slide-body">
+      <div class="quote-block">
+        <blockquote>
+          &ldquo;Ninguna entidad &mdash; usuario, dispositivo, servicio o segmento de red &mdash;
+          debe recibir confianza implícita por su ubicación.&rdquo;
+        </blockquote>
+        <cite>NIST SP 800-207, 2020</cite>
+      </div>
+      <ul style="margin-top:28px">
+        <li><span class="marker">01</span><span><strong>Verificar</strong> &mdash; identidad explícita en cada solicitud, independientemente de la red</span></li>
+        <li><span class="marker">02</span><span><strong>Autorizar</strong> &mdash; mínimo privilegio, acotado a la sesión y al recurso</span></li>
+        <li><span class="marker">03</span><span><strong>Monitorear</strong> &mdash; supervisión continua del comportamiento de toda entidad</span></li>
+      </ul>
     </div>
   </div>
 </section>
 
-<!-- ══════════════ SLIDE 17: Secretos ══════════════ -->
+<!-- ══ 04 PRINCIPIOS ══ -->
 <section>
-  <h2>Gestión de Secretos Efímeros</h2>
-  <p style="font-size:0.7em">
-    <strong>Problema:</strong> secretos hardcodeados en código fuente, imágenes de contenedor o variables de entorno.
-  </p>
-  <h3>Flujo Zero Trust con HashiCorp Vault:</h3>
-  <div>
-    <div class="flow-step"><div class="step-num">①</div><div>Pod inicia → recibe <strong>SVID de SPIRE</strong> automáticamente</div></div>
-    <div class="flow-step"><div class="step-num">②</div><div>SVID se usa para autenticarse ante <strong>Vault</strong> — sin contraseña estática</div></div>
-    <div class="flow-step"><div class="step-num">③</div><div>Vault emite <strong>credenciales dinámicas</strong> con TTL corto (ej: 15 min)</div></div>
-    <div class="flow-step"><div class="step-num">④</div><div>Pod accede al recurso (base de datos, API externa) con esas credenciales</div></div>
-    <div class="flow-step"><div class="step-num">⑤</div><div>Credenciales <strong>expiran y se renuevan</strong> automáticamente — sin intervención</div></div>
-  </div>
-  <div class="highlight-box">
-    En ningún punto existen <strong>credenciales estáticas</strong> almacenadas en el sistema.
-  </div>
-</section>
-
-<!-- ══════════════ SLIDE 18: DevSecOps ══════════════ -->
-<section>
-  <h2>DevSecOps + Zero Trust</h2>
-  <blockquote>
-    "Cada transferencia en el flujo debe probar identidad, delimitar permisos
-    y llevar evidencia hacia adelante." — Cloudaware, 2026
-  </blockquote>
-  <table>
-    <thead><tr><th>Fase</th><th>Control Zero Trust</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Desarrollo</strong></td><td>SAST · escaneo de secretos · commits firmados (GPG)</td></tr>
-      <tr><td><strong>Build (CI)</strong></td><td>Escaneo de imágenes de contenedor · firma con Cosign</td></tr>
-      <tr><td><strong>Deploy (CD)</strong></td><td>Admission controllers · verificación de firmas de imágenes</td></tr>
-      <tr><td><strong>Runtime</strong></td><td>mTLS · Network Policies · OPA · rotación automática de secretos</td></tr>
-    </tbody>
-  </table>
-  <div class="highlight-box" style="margin-top:0.6em">
-    La seguridad <strong>no es una fase terminal</strong> — es un <strong>atributo transversal</strong>
-    a todo el ciclo de vida del software.
-  </div>
-</section>
-
-<!-- ══════════════ SLIDE 19: Monitoreo ══════════════ -->
-<section>
-  <h2>Monitoreo Continuo y Observabilidad</h2>
-  <p style="font-size:0.7em">El principio de <em>verificación continua</em> requiere <strong>monitoreo permanente</strong>.</p>
-  <table>
-    <thead><tr><th>Componente</th><th>Función</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Telemetría Envoy/Istio</strong></td><td>Métricas, logs y trazas de cada solicitud inter-servicio</td></tr>
-      <tr><td><strong>UEBA</strong></td><td>Anomalías comportamentales: servicio accediendo recursos inusuales</td></tr>
-      <tr><td><strong>SIEM</strong></td><td>Correlación de eventos de múltiples fuentes independientes</td></tr>
-      <tr><td><strong>Telemetría IdP</strong></td><td>Logins anómalos, rotación inusual de tokens, escalaciones</td></tr>
-      <tr><td><strong>Telemetría SPIRE</strong></td><td>Auditoría de cada SVID emitido — trazabilidad completa</td></tr>
-    </tbody>
-  </table>
-  <blockquote>
-    "No se puede asegurar lo que no se puede ver." — Developers.dev, 2026
-  </blockquote>
-</section>
-
-<!-- ══════════════ SLIDE 20: Desafíos ══════════════ -->
-<section>
-  <h2>Desafíos de Implementación</h2>
-  <table>
-    <thead><tr><th>Desafío</th><th>Descripción</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Complejidad</strong></td><td>Integrar SPIRE + IdP + mesh + OPA + Vault + observabilidad</td></tr>
-      <tr><td><strong>Rendimiento</strong></td><td>Overhead mTLS + JWT validations (~&lt; 2 ms con Envoy)</td></tr>
-      <tr><td><strong>Costos</strong></td><td>Hardware, licencias, personal especializado en ZTA</td></tr>
-      <tr><td><strong>Errores de config.</strong></td><td><em>Deny all by default</em> requiere mapeo exhaustivo previo</td></tr>
-      <tr><td><strong>Auditoría</strong></td><td>50% de implementaciones descuidan trazabilidad (PMC, 2025)</td></tr>
-      <tr><td><strong>Fricción org.</strong></td><td>ZTA percibido como obstáculo a la velocidad de desarrollo</td></tr>
-    </tbody>
-  </table>
-  <div class="highlight-box">
-    Revisión sistemática de <strong>74 artículos</strong> (2016–2025):
-    la auditoría y la orquestación permanecen <strong>poco desarrolladas</strong> en la mayoría de implementaciones.
-  </div>
-</section>
-
-<!-- ══════════════ SLIDE 21: Casos Industriales ══════════════ -->
-<section>
-  <h2>Casos de Referencia Industrial</h2>
-  <div class="card-grid">
-    <div class="card">
-      <h4>Google BeyondCorp</h4>
-      Eliminó la VPN corporativa. Acceso basado en <strong>identidad del usuario y postura del dispositivo</strong>.
-      Todos los empleados trabajan de forma segura desde <strong>cualquier red</strong>.
+  <div class="slide slide-content">
+    <div class="slide-header">
+      <span class="slide-num">04 / 10</span>
+      <h2>Los 7 principios &mdash; NIST SP 800-207</h2>
     </div>
-    <div class="card">
-      <h4>Microsoft Zero Trust</h4>
-      <em>Zero Trust Deployment Center</em>: guías completas para identidades, dispositivos, aplicaciones,
-      datos, infraestructura y redes corporativas.
-    </div>
-    <div class="card">
-      <h4>Amazon EKS + Istio + OPA</h4>
-      Implementación reproducible de ZTA en Kubernetes documentada en
-      AWS Open Source Blog (2025). OPA como External Authorization Service.
-    </div>
-    <div class="card">
-      <h4>Sector Financiero</h4>
-      ZTA en entornos DevOps cloud-native con CI/CD continuo y verificación
-      de seguridad en cada etapa del pipeline (ScienceDirect, 2025).
+    <div class="slide-body">
+      <div class="principles">
+        <div class="principle">
+          <div class="p-num">01</div>
+          <div class="p-title">Nunca confiar, siempre verificar</div>
+          <div class="p-desc">Sin confianza implícita por ubicación de red</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">02</div>
+          <div class="p-title">Mínimo privilegio</div>
+          <div class="p-desc">Acceso acotado al tiempo y la sesión mínimos</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">03</div>
+          <div class="p-title">Asumir la brecha</div>
+          <div class="p-desc">Diseñar para contener el radio de daño</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">04</div>
+          <div class="p-title">Verificación continua</div>
+          <div class="p-desc">Autenticación permanente, no solo al inicio</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">05</div>
+          <div class="p-title">Acceso por sesión</div>
+          <div class="p-desc">Política dinámica por solicitud individual</div>
+        </div>
+        <div class="principle">
+          <div class="p-num">06</div>
+          <div class="p-title">Recursos como externos</div>
+          <div class="p-desc">Sin distinción entre red interna y externa</div>
+        </div>
+        <div class="principle" style="border-right:none">
+          <div class="p-num">07</div>
+          <div class="p-title">Identidades consistentes</div>
+          <div class="p-desc">Humanas y no humanas: workloads, CI/CD, agentes</div>
+        </div>
+        <div class="principle" style="border-right:none;background:#f8f8f8">
+          <div class="p-desc" style="padding-top:8px;font-style:normal;font-size:0.7rem">
+            Fuente: NIST SP 800-207 (2020) &middot; Palo Alto Networks (2026)
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════ SLIDE 22: Tendencias ══════════════ -->
+<!-- ══ 05 ARQUITECTURA NIST ══ -->
 <section>
-  <h2>Tendencias Emergentes</h2>
-  <table>
-    <thead><tr><th>Tendencia</th><th>Estado y proyección</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><strong>Agentes de IA como workloads</strong></td>
-        <td>SPIFFE/SPIRE directamente aplicable a agentes LLM — identidad verificable para IA</td>
-      </tr>
-      <tr>
-        <td><strong>IA para detección adaptativa</strong></td>
-        <td>Anomalías + actualización automática de políticas en respuesta predictiva</td>
-      </tr>
-      <tr>
-        <td><strong>Multi-cloud y federación</strong></td>
-        <td>SPIFFE Federation + IETF WIMSE: interoperabilidad entre dominios de confianza</td>
-      </tr>
-      <tr>
-        <td><strong>Policy-as-Code maduro</strong></td>
-        <td>OPA/Rego integrado en pipelines CI/CD con linters (Regal) y pruebas automáticas</td>
-      </tr>
-      <tr>
-        <td><strong>Criptografía post-cuántica</strong></td>
-        <td>NIST estandariza algoritmos QC-resistentes para actualizar mTLS y PKI/SPIRE</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- ══════════════ SLIDE 23: Conclusiones ══════════════ -->
-<section class="lead-slide">
-  <h2>Conclusiones</h2>
-  <div style="text-align:left; max-width:850px; margin:0 auto">
-    <div class="check-item">
-      <span class="check-icon">✅</span>
-      <span>La confianza implícita por ubicación de red <strong>ya no es viable</strong> en entornos distribuidos</span>
+  <div class="slide slide-content">
+    <div class="slide-header">
+      <span class="slide-num">05 / 10</span>
+      <h2>Componentes del modelo &mdash; PEP &middot; PDP &middot; PA</h2>
     </div>
-    <div class="check-item">
-      <span class="check-icon">✅</span>
-      <span>La <strong>identidad</strong> — humana y de workload — es el nuevo perímetro de seguridad</span>
-    </div>
-    <div class="check-item">
-      <span class="check-icon">✅</span>
-      <span>La seguridad es un atributo <strong>transversal y sistémico</strong>, no una capa final agregada</span>
-    </div>
-    <div class="check-item">
-      <span class="check-icon">✅</span>
-      <span>Cada componente asume que la <strong>capa anterior puede estar comprometida</strong> (defensa en profundidad)</span>
-    </div>
-    <div class="check-item">
-      <span class="check-icon">✅</span>
-      <span>El camino es <strong>incremental</strong>: mapear → identificar → mTLS → OPA → monitorear</span>
-    </div>
-    <div class="check-item" style="margin-top:0.6em">
-      <span class="check-icon">⚠️</span>
-      <span><em>El costo promedio de una brecha (USD 4,44M) supera ampliamente el costo de implementar ZTA correctamente.</em></span>
+    <div class="slide-body">
+      <div class="arch-diagram">  Solicitud
+      │
+      ▼
+  ┌──────────────┐    ¿Permitir?    ┌──────────────┐
+  │     PEP      │ ───────────────▶ │     PDP      │
+  │  Envoy proxy │ ◀─ Allow/Deny ── │     OPA      │
+  └──────┬───────┘                  └──────────────┘
+         │ (si Allow)                      ▲
+         ▼                                 │
+    Servicio destino               ┌───────┴──────┐
+                                   │      PA      │
+                                   │  (políticas) │
+                                   └──────────────┘</div>
+      <div class="arch-legend">
+        <div class="leg-item">
+          <div class="leg-key">PEP &mdash; Policy Enforcement Point</div>
+          <div class="leg-val">Proxy Envoy (Istio). Intercepta todo el tráfico e impone la decisión.</div>
+        </div>
+        <div class="leg-item">
+          <div class="leg-key">PDP &mdash; Policy Decision Point</div>
+          <div class="leg-val">Open Policy Agent (OPA). Evalúa políticas Rego y devuelve Allow/Deny.</div>
+        </div>
+        <div class="leg-item">
+          <div class="leg-key">PA &mdash; Policy Administrator</div>
+          <div class="leg-val">Gestiona el ciclo de vida de políticas: creación, distribución, revocación.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════ SLIDE 24: Hoja de Ruta ══════════════ -->
+<!-- ══ 06 IDENTIDAD ══ -->
 <section>
-  <h2>Hoja de Ruta — Implementación Incremental</h2>
-  <div>
-    <div class="flow-step"><div class="step-num">1</div><div><strong>Mapear</strong> todas las comunicaciones inter-servicio existentes</div></div>
-    <div class="flow-step"><div class="step-num">2</div><div><strong>Identidad verificable</strong> por workload → implementar SPIFFE/SPIRE</div></div>
-    <div class="flow-step"><div class="step-num">3</div><div><strong>mTLS</strong> entre todos los servicios + <strong>Network Policies</strong> (microsegmentación)</div></div>
-    <div class="flow-step"><div class="step-num">4</div><div><strong>Externalizar autorización</strong> hacia OPA (<em>Policy-as-Code</em> en Rego)</div></div>
-    <div class="flow-step"><div class="step-num">5</div><div><strong>Monitoreo continuo</strong>: telemetría Envoy/Istio + UEBA + SIEM</div></div>
-    <div class="flow-step"><div class="step-num">6</div><div><strong>Secretos efímeros</strong>: integrar HashiCorp Vault con SPIRE</div></div>
-    <div class="flow-step"><div class="step-num">7</div><div><strong>DevSecOps</strong>: integrar controles en pipeline CI/CD (SAST, firma, admission)</div></div>
+  <div class="slide slide-content">
+    <div class="slide-header">
+      <span class="slide-num">06 / 10</span>
+      <h2>Identidad como perímetro &mdash; SPIFFE/SPIRE y mTLS</h2>
+    </div>
+    <div class="slide-body">
+      <div class="cols">
+        <div>
+          <p class="col-title">SPIFFE / SPIRE &mdash; Identidad de workload</p>
+          <ul style="margin-top:0">
+            <li><span class="marker">—</span><span>El workload se inicia y SPIRE lo <strong>atestigua</strong> (imagen, namespace, nodo)</span></li>
+            <li><span class="marker">—</span><span>Emite un <strong>SVID</strong> &mdash; certificado X.509 de ~1 hora de vida</span></li>
+            <li><span class="marker">—</span><span>Renovación <strong>automática</strong>. Sin credenciales estáticas, sin rotación manual.</span></li>
+            <li><span class="marker">—</span><span>Aplicable a microservicios, jobs CI/CD y <em>agentes de IA</em></span></li>
+          </ul>
+        </div>
+        <div>
+          <p class="col-title">mTLS &mdash; Autenticación mutua</p>
+          <ul style="margin-top:0">
+            <li><span class="marker">—</span><span>Ambas partes presentan certificados &mdash; el servidor <strong>y</strong> el cliente</span></li>
+            <li><span class="marker">—</span><span>Cifra el tráfico <strong>este-oeste</strong> dentro del clúster</span></li>
+            <li><span class="marker">—</span><span>Gestionado automáticamente por el service mesh (Istio)</span></li>
+            <li><span class="marker">—</span><span>Overhead: <strong>&lt; 2 ms</strong> con Envoy y conexiones persistentes</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ══════════════ SLIDE 25: Preguntas ══════════════ -->
-<section class="title-slide">
-  <h1 style="font-size:1.4em">¿Preguntas?</h1>
-  <p class="title-subtitle">
-    <strong>Ariel Antinori</strong><br>
-    <a href="mailto:ariel.antinori@comunidad.unne.edu.ar">ariel.antinori@comunidad.unne.edu.ar</a><br>
-    Universidad Nacional del Nordeste — Ingeniería del SW 2
-  </p>
-  <div style="font-size:0.5em;color:#475569;margin-top:1.5em;line-height:2">
-    <strong style="color:#64748b">Referencias clave:</strong><br>
-    NIST SP 800-207 · <a href="https://doi.org/10.6028/NIST.SP.800-207" style="color:#38bdf8">doi.org/10.6028/NIST.SP.800-207</a><br>
-    NIST SP 800-207A · <a href="https://csrc.nist.gov/pubs/sp/800/207/a/final" style="color:#38bdf8">csrc.nist.gov/pubs/sp/800/207/a/final</a><br>
-    arXiv:2511.04925 · <a href="https://arxiv.org/abs/2511.04925" style="color:#38bdf8">arxiv.org/abs/2511.04925</a><br>
-    SPIFFE/SPIRE · <a href="https://spiffe.io" style="color:#38bdf8">spiffe.io</a> &nbsp;·&nbsp;
-    OPA · <a href="https://www.openpolicyagent.org" style="color:#38bdf8">openpolicyagent.org</a> &nbsp;·&nbsp;
-    Istio · <a href="https://istio.io" style="color:#38bdf8">istio.io</a>
+<!-- ══ 07 AUTORIZACIÓN ══ -->
+<section>
+  <div class="slide slide-content">
+    <div class="slide-header">
+      <span class="slide-num">07 / 10</span>
+      <h2>Autorización &mdash; OAuth 2.0 / OIDC y Open Policy Agent</h2>
+    </div>
+    <div class="slide-body">
+      <div class="cols">
+        <div>
+          <p class="col-title">Identidad humana</p>
+          <ul style="margin-top:0">
+            <li><span class="marker">—</span><span><strong>OAuth 2.0</strong>: tokens JWT emitidos por el IdP; acceso limitado sin exponer credenciales</span></li>
+            <li><span class="marker">—</span><span><strong>OIDC</strong>: capa de identidad y SSO; claims propagados entre servicios</span></li>
+            <li><span class="marker">—</span><span>Flujo: API Gateway &rarr; OIDC &rarr; JWT &rarr; mTLS interno</span></li>
+          </ul>
+        </div>
+        <div>
+          <p class="col-title">OPA &mdash; Policy as Code</p>
+          <ul style="margin-top:0">
+            <li><span class="marker">—</span><span>Políticas en <strong>Rego</strong>, externas al código del servicio</span></li>
+            <li><span class="marker">—</span><span>Actualizables <strong>sin redesplegar</strong> servicios</span></li>
+            <li><span class="marker">—</span><span>Integración con Envoy vía <em>External Authorization Filter</em></span></li>
+            <li><span class="marker">—</span><span>Versionables, testeables y auditables en CI/CD</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 08 SERVICE MESH + SECRETOS ══ -->
+<section>
+  <div class="slide slide-content">
+    <div class="slide-header">
+      <span class="slide-num">08 / 10</span>
+      <h2>Service Mesh, microsegmentación y secretos efímeros</h2>
+    </div>
+    <div class="slide-body">
+      <div class="cols">
+        <div>
+          <p class="col-title">Istio / Envoy &mdash; PEP universal</p>
+          <ul style="margin-top:0">
+            <li><span class="marker">—</span><span>Envoy como <strong>sidecar</strong> junto a cada pod; intercepta todo el tráfico</span></li>
+            <li><span class="marker">—</span><span>Impone mTLS, valida SVIDs, delega a OPA</span></li>
+            <li><span class="marker">—</span><span><strong>Network Policies</strong>: deny all por defecto; permitir solo lo necesario</span></li>
+          </ul>
+
+          <p class="col-title" style="margin-top:24px">Gestión de secretos &mdash; HashiCorp Vault</p>
+          <ul style="margin-top:0">
+            <li><span class="marker">—</span><span>Pod se autentica ante Vault con su <strong>SVID</strong> (sin contraseña estática)</span></li>
+            <li><span class="marker">—</span><span>Vault emite credenciales <strong>dinámicas</strong> con TTL corto (~15 min)</span></li>
+            <li><span class="marker">—</span><span>Renovación automática &mdash; cero credenciales estáticas en el sistema</span></li>
+          </ul>
+        </div>
+        <div style="display:flex;align-items:center">
+          <div class="arch-diagram" style="width:100%;font-size:0.65rem">Pod inicia
+  │
+  ├─▶ SPIRE emite SVID
+  │
+  ├─▶ SVID autentica ante Vault
+  │     └─▶ Vault emite creds. dinámicas
+  │
+  ├─▶ Envoy (sidecar)
+  │     ├─▶ mTLS con peers
+  │     └─▶ OPA: Allow/Deny
+  │
+  └─▶ NetworkPolicy: solo tráfico
+        explícitamente permitido</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 09 DEVSECOPS + DESAFÍOS ══ -->
+<section>
+  <div class="slide slide-content">
+    <div class="slide-header">
+      <span class="slide-num">09 / 10</span>
+      <h2>DevSecOps y desafíos de implementación</h2>
+    </div>
+    <div class="slide-body">
+      <div class="flow" style="margin-bottom:28px">
+        <div class="flow-step">
+          <div class="flow-phase">Desarrollo</div>
+          <div class="flow-items">SAST<br>Secrets scanning<br>Commits firmados</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-phase">Build (CI)</div>
+          <div class="flow-items">Escaneo de imágenes<br>Firma con Cosign<br>Creds. efímeras CI</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-phase">Deploy (CD)</div>
+          <div class="flow-items">Admission controllers<br>Verificación de firmas<br>Privilegio mínimo</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-phase">Runtime</div>
+          <div class="flow-items">mTLS &middot; OPA<br>Network Policies<br>Rotación de secretos</div>
+        </div>
+      </div>
+      <ul>
+        <li><span class="marker">!</span><span><strong>Complejidad</strong>: integrar SPIRE + IdP + service mesh + OPA + Vault + observabilidad</span></li>
+        <li><span class="marker">!</span><span><strong>Auditoría</strong>: solo el 50% de las implementaciones tienen trazabilidad robusta (PMC, 2025)</span></li>
+        <li><span class="marker">!</span><span><strong>Configuración</strong>: <em>deny all by default</em> requiere mapeo exhaustivo previo</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 10 CONCLUSIONES ══ -->
+<section>
+  <div class="slide slide-end">
+    <div style="max-width:780px;text-align:left">
+      <div class="end-title">Conclusiones</div>
+      <ul>
+        <li><span class="marker">✓</span><span>La confianza implícita por ubicación de red <strong>ya no es viable</strong> en sistemas distribuidos</span></li>
+        <li><span class="marker">✓</span><span>La <strong>identidad</strong> &mdash; humana y de workload &mdash; es el nuevo perímetro de seguridad</span></li>
+        <li><span class="marker">✓</span><span>La seguridad es un atributo <strong>transversal</strong>: cada capa asume que la anterior puede estar comprometida</span></li>
+        <li><span class="marker">✓</span><span>La implementación es <strong>incremental</strong>: mapear &rarr; SPIFFE &rarr; mTLS &rarr; OPA &rarr; monitoreo &rarr; Vault &rarr; DevSecOps</span></li>
+      </ul>
+      <div class="end-contact">
+        <strong>Ariel Antinori</strong><br>
+        <a href="mailto:ariel.antinori@comunidad.unne.edu.ar">ariel.antinori@comunidad.unne.edu.ar</a><br>
+        Universidad Nacional del Nordeste &middot; IS2 &middot; 2026
+      </div>
+    </div>
   </div>
 </section>
 
@@ -883,28 +716,22 @@ allow {
 </div><!-- .reveal -->
 
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
 <script>
   Reveal.initialize({
     hash: true,
     slideNumber: 'c/t',
-    transition: 'slide',
-    transitionSpeed: 'fast',
-    backgroundTransition: 'fade',
+    transition: 'none',
+    backgroundTransition: 'none',
     width: 1280,
     height: 720,
-    margin: 0.08,
-    minScale: 0.2,
-    maxScale: 2.0,
+    margin: 0,
+    minScale: 0.1,
+    maxScale: 4,
+    center: false,
     controls: true,
     progress: true,
-    center: false,
     touch: true,
-    loop: false,
-    autoPlayMedia: false,
-    preloadIframes: false,
-    plugins: [ RevealHighlight, RevealNotes ]
+    keyboard: true,
   });
 </script>
 </body>

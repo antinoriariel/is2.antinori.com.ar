@@ -3,722 +3,219 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zero Trust Architecture — UNNE IS2 | Ariel Antinori</title>
+  <title>Zero Trust Architecture · UNNE IS2 · Ariel Antinori</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
   <style>
-    /* ── Reset y base ──────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg:          #06101e;
-      --bg-card:     #0a1628;
-      --bg-card2:    #0d1f38;
-      --border:      #1e3a5f;
-      --accent:      #38bdf8;
-      --accent2:     #7dd3fc;
-      --accent3:     #bae6fd;
-      --gold:        #fbbf24;
-      --green:       #6ee7b7;
-      --text:        #e2eaf4;
-      --text-muted:  #94a3b8;
-      --text-dim:    #475569;
-      --radius:      10px;
-      --shadow:      0 4px 24px rgba(0,0,0,0.45);
-    }
-    html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      font-family: 'Merriweather', Georgia, serif;
+      background: #fff;
+      color: #111;
       min-height: 100vh;
-    }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; color: var(--accent2); }
-
-    /* ── Topbar ──────────────────────────────────── */
-    .topbar {
-      background: linear-gradient(135deg, #071428 0%, #0a1e3d 100%);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.8rem;
-    }
-    .topbar-left { display: flex; align-items: center; gap: 14px; }
-    .unne-seal {
-      width: 46px; height: 46px;
-      background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 900; font-size: 0.75rem; color: white; letter-spacing: -0.5px;
-    }
-    .topbar-title { line-height: 1.3; }
-    .topbar-title strong { color: var(--accent2); font-size: 0.9rem; }
-    .topbar-title span { color: var(--text-muted); display: block; font-size: 0.75rem; }
-    .topbar-right { color: var(--text-dim); font-size: 0.72rem; }
-
-    /* ── Hero ──────────────────────────────────────── */
-    .hero {
-      max-width: 900px;
+      max-width: 600px;
       margin: 0 auto;
-      padding: 64px 24px 48px;
-      text-align: center;
+      padding: 80px 32px 64px;
     }
-    .area-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(56,189,248,0.1);
-      border: 1px solid rgba(56,189,248,0.3);
-      color: var(--accent);
-      border-radius: 20px;
-      padding: 5px 16px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
+
+    /* ── Cabecera ── */
+    .inst {
+      font-size: 0.68rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      margin-bottom: 24px;
-    }
-    .hero h1 {
-      font-size: clamp(1.9rem, 5vw, 2.8rem);
-      font-weight: 800;
-      color: var(--accent);
-      line-height: 1.2;
-      margin-bottom: 10px;
-      text-shadow: 0 0 40px rgba(56,189,248,0.2);
-    }
-    .hero h1 em {
-      display: block;
-      font-size: 0.6em;
-      font-weight: 400;
-      font-style: italic;
-      color: var(--accent2);
-      margin-top: 6px;
-    }
-    .hero-sub {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      max-width: 620px;
-      margin: 14px auto 28px;
-      line-height: 1.7;
-    }
-    .keywords {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 6px;
-      margin-bottom: 36px;
-    }
-    .kw {
-      background: rgba(15,32,53,0.9);
-      border: 1px solid var(--border);
-      color: var(--accent3);
-      border-radius: 5px;
-      padding: 3px 10px;
-      font-size: 0.72rem;
-      font-family: 'Consolas', 'Courier New', monospace;
+      color: #888;
+      margin-bottom: 28px;
     }
 
-    /* ── Botones principales ─────────────────────── */
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 28px;
-      border-radius: var(--radius);
-      font-size: 0.92rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s ease;
-      text-decoration: none;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-      color: white;
-      box-shadow: 0 4px 18px rgba(2,132,199,0.35);
-    }
-    .btn-primary:hover {
-      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-      box-shadow: 0 6px 24px rgba(14,165,233,0.45);
-      transform: translateY(-2px);
-      text-decoration: none;
-      color: white;
-    }
-    .btn-secondary {
-      background: var(--bg-card);
-      color: var(--accent2);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover {
-      background: var(--bg-card2);
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      text-decoration: none;
-      color: var(--accent);
-    }
-    .btn-gold {
-      background: linear-gradient(135deg, #92400e 0%, #b45309 100%);
-      color: #fde68a;
-      box-shadow: 0 4px 18px rgba(180,83,9,0.3);
-    }
-    .btn-gold:hover {
-      background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
-      box-shadow: 0 6px 24px rgba(217,119,6,0.45);
-      transform: translateY(-2px);
-      text-decoration: none;
-      color: #fef3c7;
-    }
-    .btn-icon { font-size: 1.1em; }
-
-    /* ── Info PDF ─────────────────────────────────── */
-    .pdf-note {
-      background: rgba(251,191,36,0.07);
-      border: 1px solid rgba(251,191,36,0.2);
-      border-radius: var(--radius);
-      padding: 14px 18px;
-      max-width: 620px;
-      margin: 6px auto 0;
-      font-size: 0.78rem;
-      color: #fde68a;
-      text-align: left;
-    }
-    .pdf-note code {
-      background: rgba(0,0,0,0.3);
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-family: 'Consolas', 'Courier New', monospace;
-      color: #86efac;
-      font-size: 0.9em;
-    }
-    .pdf-note summary { cursor: pointer; font-weight: 600; list-style: none; padding: 0; }
-    .pdf-note summary::before { content: '▶  '; font-size: 0.8em; }
-    details[open] summary::before { content: '▼  '; }
-    .pdf-note ol { margin: 8px 0 0 18px; color: #fef3c7; line-height: 1.8; }
-
-    /* ── Grid de tarjetas de info ─────────────────── */
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 14px;
-      max-width: 900px;
-      margin: 40px auto 0;
-      padding: 0 24px;
-    }
-    .info-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px 18px;
-      text-align: center;
-    }
-    .info-card .num {
-      font-size: 1.7rem;
-      font-weight: 800;
-      color: var(--gold);
-      display: block;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .info-card .label {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    /* ── Divisor ──────────────────────────────────── */
-    .divider {
-      max-width: 900px;
-      margin: 40px auto;
-      border: none;
-      border-top: 1px solid var(--border);
-    }
-
-    /* ── Sección: Autor ──────────────────────────── */
-    .section { max-width: 900px; margin: 0 auto; padding: 0 24px 40px; }
-    .section-title {
-      font-size: 0.7rem;
+    h1 {
+      font-size: 1.9rem;
       font-weight: 700;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 16px;
+      line-height: 1.18;
+      margin-bottom: 10px;
     }
-    .author-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px 28px;
+
+    .sub {
+      font-size: 0.88rem;
+      font-weight: 300;
+      font-style: italic;
+      color: #555;
+      margin-bottom: 48px;
+      line-height: 1.6;
+    }
+
+    /* ── Botones ── */
+    .actions {
       display: flex;
-      align-items: flex-start;
-      gap: 22px;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 56px;
+      border: 1px solid #111;
     }
-    .author-avatar {
-      width: 64px; height: 64px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; font-weight: 800; color: white;
-      flex-shrink: 0;
-    }
-    .author-info h3 { color: var(--text); font-size: 1rem; margin-bottom: 4px; }
-    .author-info .role { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 10px; }
-    .author-info .mail {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(56,189,248,0.08);
-      border: 1px solid rgba(56,189,248,0.25);
-      color: var(--accent);
-      padding: 5px 12px;
-      border-radius: 5px;
-      font-size: 0.78rem;
-      font-family: 'Consolas', 'Courier New', monospace;
-      transition: all 0.15s;
-    }
-    .author-info .mail:hover {
-      background: rgba(56,189,248,0.15);
+
+    .btn {
+      display: block;
+      padding: 15px 20px;
+      color: #111;
       text-decoration: none;
-    }
-    .author-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 12px;
-    }
-    .author-tag {
-      background: rgba(110,231,183,0.1);
-      border: 1px solid rgba(110,231,183,0.2);
-      color: var(--green);
-      border-radius: 4px;
-      padding: 2px 8px;
-      font-size: 0.7rem;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      background: #fff;
+      border-bottom: 1px solid #111;
+      transition: background 0.12s, color 0.12s;
     }
 
-    /* ── Sección: Referencias ────────────────────── */
-    .refs-list {
-      display: grid;
-      gap: 8px;
+    .btn:last-child { border-bottom: none; }
+    .btn:hover { background: #111; color: #fff; text-decoration: none; }
+
+    .btn-primary { background: #111; color: #fff; font-weight: 700; }
+    .btn-primary:hover { background: #333; }
+
+    /* ── Autor ── */
+    .author {
+      margin-bottom: 48px;
+      padding-top: 32px;
+      border-top: 1px solid #ddd;
     }
-    .ref-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px 16px;
-      transition: border-color 0.15s;
+
+    .author-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 4px;
     }
-    .ref-item:hover { border-color: var(--accent); }
-    .ref-authors { color: var(--text-muted); font-size: 0.75rem; margin-bottom: 4px; }
-    .ref-title { color: var(--accent2); font-size: 0.82rem; font-weight: 600; line-height: 1.4; }
-    .ref-meta { color: var(--text-dim); font-size: 0.72rem; margin-top: 4px; }
-    .ref-url {
-      display: inline-block;
-      margin-top: 6px;
-      color: var(--accent);
-      font-size: 0.72rem;
-      font-family: monospace;
-      word-break: break-all;
+
+    .author-role {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: #666;
+      margin-bottom: 10px;
+      line-height: 1.5;
     }
-    .refs-filter {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+
+    .author a {
+      font-size: 0.75rem;
+      color: #111;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ── Referencias ── */
+    .refs-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #aaa;
       margin-bottom: 16px;
     }
-    .filter-btn {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      border-radius: 5px;
-      padding: 5px 12px;
-      font-size: 0.73rem;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .filter-btn:hover, .filter-btn.active {
-      background: rgba(56,189,248,0.1);
-      border-color: var(--accent);
-      color: var(--accent);
+
+    .refs { list-style: none; }
+    .refs li { border-top: 1px solid #eee; }
+    .refs li:last-child { border-bottom: 1px solid #eee; }
+
+    .refs a {
+      display: block;
+      padding: 10px 0;
+      color: #111;
+      text-decoration: none;
+      font-size: 0.76rem;
+      font-weight: 400;
+      line-height: 1.55;
     }
 
-    /* ── Footer ───────────────────────────────────── */
+    .refs a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    .refs .src {
+      display: block;
+      font-size: 0.65rem;
+      color: #999;
+      font-weight: 300;
+      font-style: italic;
+      margin-top: 2px;
+    }
+
+    /* ── Footer ── */
     footer {
-      background: #040d1a;
-      border-top: 1px solid var(--border);
-      padding: 28px 40px;
-      text-align: center;
-      color: var(--text-dim);
-      font-size: 0.73rem;
-      margin-top: 40px;
-    }
-    footer a { color: var(--text-muted); }
-
-    /* ── Responsive ───────────────────────────────── */
-    @media (max-width: 600px) {
-      .topbar { padding: 10px 16px; }
-      .hero { padding: 40px 16px 32px; }
-      .author-card { flex-direction: column; align-items: center; text-align: center; }
-      .author-tags { justify-content: center; }
-      .cta-row { flex-direction: column; align-items: center; }
-      .btn { width: 100%; max-width: 300px; justify-content: center; }
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid #eee;
+      font-size: 0.65rem;
+      font-weight: 300;
+      color: #bbb;
     }
   </style>
 </head>
 <body>
 
-<!-- ══ TOPBAR ══ -->
-<header class="topbar">
-  <div class="topbar-left">
-    <div class="unne-seal">UNNE</div>
-    <div class="topbar-title">
-      <strong>Universidad Nacional del Nordeste</strong>
-      <span>Ingeniería del Software II &nbsp;·&nbsp; 2026</span>
-    </div>
-  </div>
-  <div class="topbar-right">Área: Ciberseguridad · Arquitectura de SW · DevSecOps</div>
-</header>
+  <header>
+    <p class="inst">Universidad Nacional del Nordeste &middot; Ingeniería del Software II &middot; 2026</p>
+    <h1>Arquitectura de Confianza Cero</h1>
+    <p class="sub">Zero Trust Architecture (ZTA) &mdash; diseño de software bajo la premisa de red comprometida</p>
+  </header>
 
-<!-- ══ HERO ══ -->
-<main>
-<section class="hero">
-  <div class="area-badge">
-    <span>📄</span> Trabajo Académico
-  </div>
+  <nav class="actions">
+    <a href="presentacion.html" class="btn btn-primary">Ver presentación</a>
+    <a href="downloads/zero_trust_arquitectura_confianza_cero.md" download class="btn">Descargar documento (Markdown)</a>
+    <a href="downloads/zero_trust_paper.tex" download class="btn">Descargar paper (LaTeX)</a>
+  </nav>
 
-  <h1>
-    Arquitectura de Confianza Cero
-    <em>Zero Trust Architecture (ZTA)</em>
-  </h1>
-
-  <p class="hero-sub">
-    Diseño de software bajo la premisa de <strong style="color:#fbbf24">red comprometida</strong>:
-    autenticación y autorización granular en microservicios.
-    Análisis de fundamentos teóricos, implementación técnica y desafíos
-    operativos en arquitecturas cloud-nativas.
-  </p>
-
-  <div class="keywords">
-    <span class="kw">Zero Trust Architecture</span>
-    <span class="kw">microservicios</span>
-    <span class="kw">mTLS</span>
-    <span class="kw">SPIFFE/SPIRE</span>
-    <span class="kw">OAuth 2.0</span>
-    <span class="kw">OIDC</span>
-    <span class="kw">OPA</span>
-    <span class="kw">service mesh</span>
-    <span class="kw">microsegmentación</span>
-    <span class="kw">DevSecOps</span>
-    <span class="kw">NIST SP 800-207</span>
-    <span class="kw">Istio · Envoy</span>
-  </div>
-
-  <!-- Botones CTA -->
-  <div class="cta-row">
-    <a href="presentacion.html" target="_blank" class="btn btn-primary">
-      <span class="btn-icon">▶</span>
-      Ver Presentación
-    </a>
-    <a href="downloads/zero_trust_arquitectura_confianza_cero.md" download class="btn btn-secondary">
-      <span class="btn-icon">⤓</span>
-      Descargar Markdown
-    </a>
-    <a href="downloads/zero_trust_paper.tex" download class="btn btn-gold">
-      <span class="btn-icon">⤓</span>
-      Descargar LaTeX (.tex)
-    </a>
-  </div>
-
-  <!-- Instrucciones PDF -->
-  <details class="pdf-note">
-    <summary>Cómo compilar el PDF desde el archivo LaTeX</summary>
-    <ol>
-      <li>Descargue el archivo <code>zero_trust_paper.tex</code> (botón superior)</li>
-      <li>Asegúrese de tener instalado <strong>TeX Live</strong>, <strong>MiKTeX</strong> o <strong>MacTeX</strong></li>
-      <li>Ejecute en la misma carpeta:<br>
-        <code>pdflatex zero_trust_paper.tex</code><br>
-        <code>pdflatex zero_trust_paper.tex</code> &nbsp;(segunda pasada para el índice)
-      </li>
-      <li>También puede regenerar el <code>.tex</code> desde la raíz del repositorio:<br>
-        <code>python convert_to_latex.py</code>&nbsp; o &nbsp;<code>python convert_to_latex.py --pdf</code>
-      </li>
-    </ol>
-  </details>
-</section>
-
-<!-- Tarjetas de estadísticas clave -->
-<div class="info-grid">
-  <div class="info-card">
-    <span class="num">+321%</span>
-    <div class="label">Aumento de brechas<br>en APIs en 2024</div>
-  </div>
-  <div class="info-card">
-    <span class="num">89%</span>
-    <div class="label">Organizaciones con<br>incidentes en Kubernetes</div>
-  </div>
-  <div class="info-card">
-    <span class="num">$4.44M</span>
-    <div class="label">Costo promedio<br>de una brecha (IBM 2025)</div>
-  </div>
-  <div class="info-card">
-    <span class="num">25</span>
-    <div class="label">Diapositivas<br>en la presentación</div>
-  </div>
-</div>
-
-<hr class="divider">
-
-<!-- ══ AUTOR ══ -->
-<section class="section">
-  <p class="section-title">Autor</p>
-  <div class="author-card">
-    <div class="author-avatar">AA</div>
-    <div class="author-info">
-      <h3>Ariel Antinori</h3>
-      <p class="role">Estudiante · Universidad Nacional del Nordeste · Ingeniería del Software II</p>
-      <a href="mailto:ariel.antinori@comunidad.unne.edu.ar" class="mail">
-        ✉ ariel.antinori@comunidad.unne.edu.ar
-      </a>
-      <div class="author-tags">
-        <span class="author-tag">Ciberseguridad</span>
-        <span class="author-tag">Arquitectura de Software</span>
-        <span class="author-tag">Cloud Native</span>
-        <span class="author-tag">DevSecOps</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- ══ REFERENCIAS ══ -->
-<section class="section">
-  <p class="section-title">Referencias</p>
-
-  <div class="refs-filter">
-    <button class="filter-btn active" onclick="filterRefs('all', this)">Todas</button>
-    <button class="filter-btn" onclick="filterRefs('normativo', this)">Normativo</button>
-    <button class="filter-btn" onclick="filterRefs('academico', this)">Académico</button>
-    <button class="filter-btn" onclick="filterRefs('industrial', this)">Industrial</button>
-  </div>
-
-  <div class="refs-list" id="refs-list">
-
-    <!-- NIST -->
-    <div class="ref-item" data-cat="normativo">
-      <div class="ref-authors">National Institute of Standards and Technology. (2020).</div>
-      <div class="ref-title">Zero Trust Architecture (NIST Special Publication 800-207)</div>
-      <div class="ref-meta">U.S. Department of Commerce · Marco normativo global de ZTA</div>
-      <a href="https://doi.org/10.6028/NIST.SP.800-207" target="_blank" rel="noopener" class="ref-url">doi.org/10.6028/NIST.SP.800-207</a>
-    </div>
-
-    <div class="ref-item" data-cat="normativo">
-      <div class="ref-authors">National Institute of Standards and Technology. (2023).</div>
-      <div class="ref-title">A Zero Trust Architecture Model for Access Control in Cloud-Native Applications in Multi-Cloud Environments (NIST SP 800-207A)</div>
-      <div class="ref-meta">U.S. Department of Commerce · Extensión cloud-nativa y multi-nube</div>
-      <a href="https://csrc.nist.gov/pubs/sp/800/207/a/final" target="_blank" rel="noopener" class="ref-url">csrc.nist.gov/pubs/sp/800/207/a/final</a>
-    </div>
-
-    <!-- arXiv -->
-    <div class="ref-item" data-cat="academico">
-      <div class="ref-authors">arXiv. (2025).</div>
-      <div class="ref-title">Zero Trust Security Model Implementation in Microservices Architectures Using Identity Federation</div>
-      <div class="ref-meta">arXiv:2511.04925 · SPIFFE/SPIRE, OIDC Federation, arquitecturas ZTA</div>
-      <a href="https://arxiv.org/abs/2511.04925" target="_blank" rel="noopener" class="ref-url">arxiv.org/abs/2511.04925</a>
-    </div>
-
-    <div class="ref-item" data-cat="academico">
-      <div class="ref-authors">arXiv. (2025).</div>
-      <div class="ref-title">Identity Control Plane: The Unifying Layer for Zero Trust Infrastructure</div>
-      <div class="ref-meta">arXiv:2504.17759 · IETF WIMSE, workload identity en multi-cloud</div>
-      <a href="https://arxiv.org/pdf/2504.17759" target="_blank" rel="noopener" class="ref-url">arxiv.org/pdf/2504.17759</a>
-    </div>
-
-    <div class="ref-item" data-cat="academico">
-      <div class="ref-authors">Nasiruzzaman et al. (2024).</div>
-      <div class="ref-title">The Evolution of Zero Trust Architecture (ZTA) from Concept to Implementation</div>
-      <div class="ref-meta">arXiv:2504.11984</div>
-      <a href="https://arxiv.org/abs/2504.11984" target="_blank" rel="noopener" class="ref-url">arxiv.org/abs/2504.11984</a>
-    </div>
-
-    <div class="ref-item" data-cat="academico">
-      <div class="ref-authors">PMC — PubMed Central. (2025).</div>
-      <div class="ref-title">A Systematic Literature Review on the Implementation and Challenges of Zero Trust Architecture Across Domains</div>
-      <div class="ref-meta">Sensors 2025, 25, 6118 · Revisión de 74 artículos (2016–2025)</div>
-      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12526847/" target="_blank" rel="noopener" class="ref-url">pmc.ncbi.nlm.nih.gov/articles/PMC12526847/</a>
-    </div>
-
-    <div class="ref-item" data-cat="academico">
-      <div class="ref-authors">Kesarpu, S. (2025).</div>
-      <div class="ref-title">Zero-Trust Architecture in Java Microservices</div>
-      <div class="ref-meta">International Journal of Networks and Security · Istio, OAuth 2.0, Spring Security</div>
-      <a href="https://www.academicpublishers.org/journals/index.php/ijns/article/view/5451" target="_blank" rel="noopener" class="ref-url">academicpublishers.org/…/5451</a>
-    </div>
-
-    <div class="ref-item" data-cat="academico">
-      <div class="ref-authors">ScienceDirect — Elsevier. (2025).</div>
-      <div class="ref-title">Enhancing cloud-native DevSecOps: A Zero Trust approach for the financial sector</div>
-      <div class="ref-meta">Science of Computer Programming · ZTA en entornos DevOps del sector financiero</div>
-      <a href="https://www.sciencedirect.com/science/article/abs/pii/S0920548925000042" target="_blank" rel="noopener" class="ref-url">sciencedirect.com/…/S0920548925000042</a>
-    </div>
-
-    <!-- Industrial -->
-    <div class="ref-item" data-cat="industrial">
-      <div class="ref-authors">Amazon Web Services. (2025).</div>
-      <div class="ref-title">Achieving Zero Trust Security on Amazon EKS with Istio</div>
-      <div class="ref-meta">AWS Open Source Blog · Implementación ZTA en Kubernetes con OPA</div>
-      <a href="https://aws.amazon.com/blogs/opensource/achieving-zero-trust-security-on-amazon-eks-with-istio/" target="_blank" rel="noopener" class="ref-url">aws.amazon.com/blogs/opensource/…</a>
-    </div>
-
-    <div class="ref-item" data-cat="industrial">
-      <div class="ref-authors">Tetrate. (2023).</div>
-      <div class="ref-title">Understanding Istio and Open Policy Agent (OPA)</div>
-      <div class="ref-meta">Tetrate Blog · Istio, Envoy, OPA en contexto ZTA</div>
-      <a href="https://tetrate.io/blog/understanding-istio-and-open-policy-agent-opa" target="_blank" rel="noopener" class="ref-url">tetrate.io/blog/understanding-istio-and-open-policy-agent-opa</a>
-    </div>
-
-    <div class="ref-item" data-cat="industrial">
-      <div class="ref-authors">Tetrate. (2023).</div>
-      <div class="ref-title">NIST SP 800-207A Explained: A Zero Trust Architecture Model for Access Control in Cloud-Native Applications</div>
-      <div class="ref-meta">Tetrate Blog · Análisis del SP 800-207A</div>
-      <a href="https://tetrate.io/blog/nist-sp-800-207a-explained-zero-trust-architecture-model-for-access-control" target="_blank" rel="noopener" class="ref-url">tetrate.io/blog/nist-sp-800-207a-explained…</a>
-    </div>
-
-    <div class="ref-item" data-cat="industrial">
-      <div class="ref-authors">Sameerbhanushali. (2026).</div>
-      <div class="ref-title">SPIFFE & SPIRE: The Workload Identity Standard Quietly Powering Zero Trust</div>
-      <div class="ref-meta">Substack · SVID, SPIRE, credenciales efímeras, HashiCorp Vault</div>
-      <a href="https://sameerbhanushali.substack.com/p/spiffe-and-spire-the-workload-identity" target="_blank" rel="noopener" class="ref-url">sameerbhanushali.substack.com/p/spiffe-and-spire…</a>
-    </div>
-
-    <div class="ref-item" data-cat="industrial">
-      <div class="ref-authors">DZone. (2025).</div>
-      <div class="ref-title">Building Bulletproof Infrastructure With Istio and OPA (Zero Trust API Security)</div>
-      <div class="ref-meta">DZone · Istio, OPA, tráfico este-oeste</div>
-      <a href="https://dzone.com/articles/zero-trust-api-security-istio-opa" target="_blank" rel="noopener" class="ref-url">dzone.com/articles/zero-trust-api-security-istio-opa</a>
-    </div>
-
-    <div class="ref-item" data-cat="industrial">
-      <div class="ref-authors">Developers.dev. (2026).</div>
-      <div class="ref-title">Zero Trust Microservices: mTLS & Identity Architecture Guide</div>
-      <div class="ref-meta">Developers.dev · mTLS, SPIFFE, overhead de latencia</div>
-      <a href="https://www.developers.dev/tech-talk/the-architect-s-decision-implementing-zero-trust-security-in-microservices-at-scale.html" target="_blank" rel="noopener" class="ref-url">developers.dev/tech-talk/…</a>
-    </div>
-
-    <div class="ref-item" data-cat="industrial">
-      <div class="ref-authors">Groundcover. (2026).</div>
-      <div class="ref-title">Zero Trust in Kubernetes: Principles, Architecture & Best Practices</div>
-      <div class="ref-meta">Groundcover · Movimiento lateral, incidentes en K8s</div>
-      <a href="https://www.groundcover.com/learn/security/zero-trust-kubernetes" target="_blank" rel="noopener" class="ref-url">groundcover.com/learn/security/zero-trust-kubernetes</a>
-    </div>
-
-    <div class="ref-item" data-cat="industrial">
-      <div class="ref-authors">AccuKnox. (2025, 2026).</div>
-      <div class="ref-title">How To Implement Zero Trust Architecture / Best Microsegmentation Tools</div>
-      <div class="ref-meta">AccuKnox Blog · Microsegmentación, Network Policies en Kubernetes</div>
-      <a href="https://accuknox.com/blog/zero-trust-architechture" target="_blank" rel="noopener" class="ref-url">accuknox.com/blog/zero-trust-architechture</a>
-    </div>
-
-    <div class="ref-item" data-cat="industrial">
-      <div class="ref-authors">Cerbos. (2025).</div>
-      <div class="ref-title">Zero-Trust for Microservices, a Practical Blueprint</div>
-      <div class="ref-meta">Cerbos Blog · Autorización, agentes de IA como workloads</div>
-      <a href="https://www.cerbos.dev/blog/zero-trust-for-microservices" target="_blank" rel="noopener" class="ref-url">cerbos.dev/blog/zero-trust-for-microservices</a>
-    </div>
-
-    <div class="ref-item" data-cat="industrial">
-      <div class="ref-authors">Cloudaware. (2026).</div>
-      <div class="ref-title">Implementing Zero Trust in DevSecOps Workflow in 2026</div>
-      <div class="ref-meta">Cloudaware Blog · Integración ZTA en pipeline CI/CD</div>
-      <a href="https://cloudaware.com/blog/zero-trust-devsecops/" target="_blank" rel="noopener" class="ref-url">cloudaware.com/blog/zero-trust-devsecops/</a>
-    </div>
-
-    <div class="ref-item" data-cat="normativo">
-      <div class="ref-authors">Kindervag, J. (2010).</div>
-      <div class="ref-title">No More Chewy Centers: Introducing The Zero Trust Model Of Information Security</div>
-      <div class="ref-meta">Forrester Research · Informe seminal que acuña el término Zero Trust</div>
-    </div>
-
-    <div class="ref-item" data-cat="industrial">
-      <div class="ref-authors">Open Policy Agent. (2025).</div>
-      <div class="ref-title">OPA-Envoy Plugin & Tutorial: Istio</div>
-      <div class="ref-meta">OPA Documentation · Integración con Envoy External Authorization</div>
-      <a href="https://www.openpolicyagent.org/docs/envoy" target="_blank" rel="noopener" class="ref-url">openpolicyagent.org/docs/envoy</a>
-    </div>
-
-    <div class="ref-item" data-cat="industrial">
-      <div class="ref-authors">IBM. (2025).</div>
-      <div class="ref-title">Cost of a Data Breach Report 2025</div>
-      <div class="ref-meta">IBM Security · Costo promedio global de una brecha: USD 4,44 millones</div>
-    </div>
-
-    <div class="ref-item" data-cat="normativo">
-      <div class="ref-authors">Wikipedia. (2025).</div>
-      <div class="ref-title">Zero Trust Architecture</div>
-      <div class="ref-meta">Wikipedia · ETSI TS 104 102, metodología ZT-Kipling, estándar europeo</div>
-      <a href="https://en.wikipedia.org/wiki/Zero_trust_architecture" target="_blank" rel="noopener" class="ref-url">en.wikipedia.org/wiki/Zero_trust_architecture</a>
-    </div>
-
-    <div class="ref-item" data-cat="industrial">
-      <div class="ref-authors">Zscaler. (2025).</div>
-      <div class="ref-title">A Brief(er) History of Zero Trust: Major Milestones in Rethinking Enterprise Security</div>
-      <div class="ref-meta">CXO Revolutionaries · Historia y evolución de ZTA</div>
-      <a href="https://www.zscaler.com/blogs/product-insights/brief-er-history-zero-trust-major-milestones-rethinking-enterprise-security" target="_blank" rel="noopener" class="ref-url">zscaler.com/blogs/…</a>
-    </div>
-
-    <div class="ref-item" data-cat="industrial">
-      <div class="ref-authors">Markaicode. (2025).</div>
-      <div class="ref-title">Zero-Trust APIs in 2025: OAuth 3.0 and Open Policy Agent (OPA) Deep Dive</div>
-      <div class="ref-meta">Markaicode · Estadísticas de brechas en APIs 2024</div>
-      <a href="https://markaicode.com/zero-trust-apis-oauth-opa-guide/" target="_blank" rel="noopener" class="ref-url">markaicode.com/zero-trust-apis-oauth-opa-guide/</a>
-    </div>
-
-    <div class="ref-item" data-cat="academico">
-      <div class="ref-authors">Wiley Online Library. (2025).</div>
-      <div class="ref-title">Zero Trust Architecture as a Risk Countermeasure in Small–Medium Enterprises and Advanced Technology Systems</div>
-      <div class="ref-meta">Risk Analysis · Costos de adopción y mantenimiento continuo de ZTA</div>
-      <a href="https://doi.org/10.1111/risa.70026" target="_blank" rel="noopener" class="ref-url">doi.org/10.1111/risa.70026</a>
-    </div>
-
-  </div><!-- /#refs-list -->
-</section>
-</main>
-
-<!-- ══ FOOTER ══ -->
-<footer>
-  <p>
-    Trabajo académico — <strong style="color:#94a3b8">Ariel Antinori</strong> &nbsp;·&nbsp;
+  <section class="author">
+    <p class="author-name">Ariel Antinori</p>
+    <p class="author-role">Universidad Nacional del Nordeste &middot; Ingeniería del SW 2</p>
     <a href="mailto:ariel.antinori@comunidad.unne.edu.ar">ariel.antinori@comunidad.unne.edu.ar</a>
-    &nbsp;·&nbsp; Universidad Nacional del Nordeste &nbsp;·&nbsp; Ingeniería del Software II &nbsp;·&nbsp; Junio 2026
-  </p>
-  <p style="margin-top:6px">
-    Presentación generada con <a href="https://revealjs.com" target="_blank" rel="noopener">Reveal.js</a> ·
-    Fuente de presentación compatible con <a href="https://marp.app" target="_blank" rel="noopener">Marp</a> ·
-    Paper en <a href="https://www.latex-project.org" target="_blank" rel="noopener">LaTeX</a>
-  </p>
-</footer>
+  </section>
 
-<script>
-  function filterRefs(cat, btn) {
-    // Actualizar botones activos
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+  <section>
+    <p class="refs-label">Referencias</p>
+    <ul class="refs">
+      <li><a href="https://doi.org/10.6028/NIST.SP.800-207" target="_blank" rel="noopener">
+        NIST SP 800-207 &mdash; Zero Trust Architecture
+        <span class="src">National Institute of Standards and Technology, 2020</span>
+      </a></li>
+      <li><a href="https://csrc.nist.gov/pubs/sp/800/207/a/final" target="_blank" rel="noopener">
+        NIST SP 800-207A &mdash; ZTA for Cloud-Native &amp; Multi-Cloud
+        <span class="src">National Institute of Standards and Technology, 2023</span>
+      </a></li>
+      <li><a href="https://arxiv.org/abs/2511.04925" target="_blank" rel="noopener">
+        Zero Trust Security Model in Microservices Using Identity Federation
+        <span class="src">arXiv:2511.04925, 2025</span>
+      </a></li>
+      <li><a href="https://arxiv.org/abs/2504.11984" target="_blank" rel="noopener">
+        The Evolution of ZTA from Concept to Implementation
+        <span class="src">arXiv:2504.11984, 2024</span>
+      </a></li>
+      <li><a href="https://arxiv.org/pdf/2504.17759" target="_blank" rel="noopener">
+        Identity Control Plane: The Unifying Layer for Zero Trust Infrastructure
+        <span class="src">arXiv:2504.17759, 2025</span>
+      </a></li>
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12526847/" target="_blank" rel="noopener">
+        Systematic Literature Review on ZTA Implementation and Challenges
+        <span class="src">Sensors 2025, 25, 6118 &mdash; PubMed Central</span>
+      </a></li>
+      <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0920548925000042" target="_blank" rel="noopener">
+        Cloud-native DevSecOps: A Zero Trust Approach for the Financial Sector
+        <span class="src">ScienceDirect &mdash; Elsevier, 2025</span>
+      </a></li>
+      <li><a href="https://aws.amazon.com/blogs/opensource/achieving-zero-trust-security-on-amazon-eks-with-istio/" target="_blank" rel="noopener">
+        Achieving Zero Trust Security on Amazon EKS with Istio
+        <span class="src">AWS Open Source Blog, 2025</span>
+      </a></li>
+      <li><a href="https://tetrate.io/blog/nist-sp-800-207a-explained-zero-trust-architecture-model-for-access-control" target="_blank" rel="noopener">
+        NIST SP 800-207A Explained
+        <span class="src">Tetrate, 2023</span>
+      </a></li>
+      <li><a href="https://doi.org/10.1111/risa.70026" target="_blank" rel="noopener">
+        Zero Trust Architecture as Risk Countermeasure in SMEs
+        <span class="src">Risk Analysis &mdash; Wiley, 2025</span>
+      </a></li>
+    </ul>
+  </section>
 
-    // Filtrar tarjetas
-    document.querySelectorAll('.ref-item').forEach(item => {
-      if (cat === 'all' || item.dataset.cat === cat) {
-        item.style.display = '';
-      } else {
-        item.style.display = 'none';
-      }
-    });
-  }
-</script>
+  <footer>Trabajo académico &middot; UNNE IS2 &middot; Junio 2026</footer>
+
 </body>
 </html>
