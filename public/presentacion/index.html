@@ -460,9 +460,9 @@
       <li><a href="#zta"><span>Zero Trust Architecture</span><span class="toc-num">02</span></a></li>
       <li><a href="#principios"><span>Los 7 principios &mdash; NIST SP 800-207</span><span class="toc-num">03</span></a></li>
       <li><a href="#modelo"><span>Componentes del modelo &mdash; PEP &middot; PDP &middot; PA</span><span class="toc-num">04</span></a></li>
-      <li><a href="#identidad"><span>Identidad como perímetro &mdash; SPIFFE/SPIRE y mTLS</span><span class="toc-num">05</span></a></li>
-      <li><a href="#autorizacion"><span>Autorización &mdash; OAuth 2.0 / OIDC y OPA</span><span class="toc-num">06</span></a></li>
-      <li><a href="#infraestructura"><span>Service mesh, microsegmentación y secretos</span><span class="toc-num">07</span></a></li>
+      <li><a href="#identidad"><span>Diagnóstico previo a la implementación</span><span class="toc-num">05</span></a></li>
+      <li><a href="#autorizacion"><span>Errores frecuentes y cómo evitarlos</span><span class="toc-num">06</span></a></li>
+      <li><a href="#infraestructura"><span>Hoja de ruta de adopción incremental</span><span class="toc-num">07</span></a></li>
       <li><a href="#devsecops"><span>DevSecOps y desafíos de implementación</span><span class="toc-num">08</span></a></li>
       <li><a href="#conclusiones"><span>Conclusiones</span><span class="toc-num">09</span></a></li>
     </ol>
@@ -611,26 +611,27 @@
     <section class="sec" id="identidad">
       <div class="sec-header">
         <span class="sec-num">05</span>
-        <h2>Identidad como perímetro &mdash; SPIFFE/SPIRE y mTLS</h2>
+        <h2>Diagnóstico previo a la implementación</h2>
       </div>
+
+      <p style="margin-bottom:24px;font-size:0.9rem;color:#444">Antes de tocar la infraestructura, hay que saber qué existe y cómo fluye el tráfico. Sin esta base, las políticas de ZTA bloquearan cosas legítimas o dejarán pasar amenazas.</p>
 
       <div class="cols">
         <div>
-          <p class="col-t">SPIFFE / SPIRE &mdash; Identidad de workload</p>
+          <p class="col-t">Relevamiento de comunicaciones</p>
           <ul class="items">
-            <li><span class="mk">—</span><span>SPIRE atestigua el workload al iniciarse (imagen, namespace, nodo)</span></li>
-            <li><span class="mk">—</span><span>Emite un <strong>SVID</strong>: certificado X.509 de ~1 hora de vida</span></li>
-            <li><span class="mk">—</span><span>Renovación <strong>automática</strong>. Sin credenciales estáticas ni rotación manual.</span></li>
-            <li><span class="mk">—</span><span>Aplicable a microservicios, jobs CI/CD y agentes de IA</span></li>
+            <li><span class="mk">—</span><span>Mapear quién llama a quién y en qué puerto &mdash; herramientas: <strong>tcpdump</strong>, <strong>Hubble</strong> (Cilium), logs de firewall</span></li>
+            <li><span class="mk">—</span><span>Identificar servicios que se comunican sin ningún mecanismo de autenticación entre sí</span></li>
+            <li><span class="mk">—</span><span>Detectar tráfico norte-sur no documentado hacia Internet</span></li>
           </ul>
         </div>
         <div>
-          <p class="col-t">mTLS &mdash; Autenticación mutua</p>
+          <p class="col-t">Inventario de credenciales y activos</p>
           <ul class="items">
-            <li><span class="mk">—</span><span>Ambas partes presentan certificados: servidor <strong>y</strong> cliente</span></li>
-            <li><span class="mk">—</span><span>Cifra el tráfico <strong>este-oeste</strong> dentro del clúster</span></li>
-            <li><span class="mk">—</span><span>Gestionado automáticamente por el service mesh (Istio)</span></li>
-            <li><span class="mk">—</span><span>Overhead: <strong>&lt; 2 ms</strong> con Envoy y conexiones persistentes</span></li>
+            <li><span class="mk">—</span><span>Auditar cuántos secretos están <strong>hardcodeados</strong> en código o variables de entorno de los pods</span></li>
+            <li><span class="mk">—</span><span>Listar cuentas de servicio con permisos excesivos (<em>cluster-admin</em> innecesarios)</span></li>
+            <li><span class="mk">—</span><span>Priorizar activos críticos: bases de datos, servicios de pago, APIs externas &mdash; son el primer objetivo</span></li>
+            <li><span class="mk">—</span><span>Resultado esperado: mapa de dependencias y lista de riesgos ordenada por impacto</span></li>
           </ul>
         </div>
       </div>
@@ -640,72 +641,51 @@
     <section class="sec" id="autorizacion">
       <div class="sec-header">
         <span class="sec-num">06</span>
-        <h2>Autorización &mdash; OAuth 2.0 / OIDC y Open Policy Agent</h2>
+        <h2>Errores frecuentes y cómo evitarlos</h2>
       </div>
 
-      <div class="cols">
-        <div>
-          <p class="col-t">Identidad humana</p>
-          <ul class="items">
-            <li><span class="mk">—</span><span><strong>OAuth 2.0</strong>: tokens JWT emitidos por el IdP; acceso limitado sin exponer credenciales</span></li>
-            <li><span class="mk">—</span><span><strong>OIDC</strong>: capa de identidad y SSO; claims propagados entre servicios</span></li>
-            <li><span class="mk">—</span><span>Flujo en producción: API Gateway &rarr; OIDC &rarr; JWT &rarr; mTLS interno</span></li>
-          </ul>
-        </div>
-        <div>
-          <p class="col-t">OPA &mdash; Policy as Code</p>
-          <ul class="items">
-            <li><span class="mk">—</span><span>Políticas en <strong>Rego</strong>, externas al código del servicio</span></li>
-            <li><span class="mk">—</span><span>Actualizables <strong>sin redesplegar</strong> los microservicios</span></li>
-            <li><span class="mk">—</span><span>Integración con Envoy vía External Authorization Filter</span></li>
-            <li><span class="mk">—</span><span>Versionables, testeables y auditables en CI/CD</span></li>
-          </ul>
-        </div>
-      </div>
+      <ul class="items">
+        <li><span class="mk">!</span><span><strong>mTLS en modo permisivo que nunca se endurece</strong> — el service mesh registra violaciones pero no bloquea; la mayoría de los equipos lo dejan así en producción indefinidamente. Fijar fecha de activación y tratar el modo estricto como requisito, no como meta aspiracional.</span></li>
+        <li><span class="mk">!</span><span><strong>Secretos en variables de entorno del pod</strong> — son visibles en el API de Kubernetes, en logs y en volcados de proceso. Migrar a un gestor de secretos dinámico con TTL corto; jamás asumir que el namespace aísla el acceso.</span></li>
+        <li><span class="mk">!</span><span><strong>Políticas &ldquo;allow all&rdquo; como punto de partida temporal</strong> — lo temporal se vuelve permanente. Comenzar con <em>deny by default</em> en un servicio no crítico, validar que nada se rompe y expandir progresivamente.</span></li>
+        <li><span class="mk">!</span><span><strong>Sin auditoría de accesos</strong> — si no se loguea quién accedió a qué y cuándo, ZTA es solo una arquitectura de papel. Tratar los logs de autorización como datos de negocio: retenidos, indexados y alertados.</span></li>
+        <li><span class="mk">!</span><span><strong>Identidad de workload ignorada</strong> — autenticar solo a usuarios humanos deja el tráfico entre servicios sin control. La identidad de máquina es tan crítica como la humana.</span></li>
+      </ul>
     </section>
 
     <!-- 07 -->
     <section class="sec" id="infraestructura">
       <div class="sec-header">
         <span class="sec-num">07</span>
-        <h2>Service mesh, microsegmentación y secretos efímeros</h2>
+        <h2>Hoja de ruta de adopción incremental</h2>
       </div>
 
-      <div class="cols">
-        <div>
-          <p class="col-t">Istio / Envoy &mdash; PEP universal</p>
-          <ul class="items">
-            <li><span class="mk">—</span><span>Envoy como <strong>sidecar</strong> junto a cada pod; intercepta todo el tráfico</span></li>
-            <li><span class="mk">—</span><span>Impone mTLS, valida SVIDs, delega decisión a OPA</span></li>
-            <li><span class="mk">—</span><span><strong>Network Policies</strong>: deny all por defecto; solo tráfico explícitamente permitido</span></li>
-          </ul>
+      <p style="margin-bottom:24px;font-size:0.9rem;color:#444">ZTA no se implementa en un sprint. Las organizaciones que lo intentan de golpe fracasan por fricción operativa. El camino probado es incremental: visibilidad primero, control después.</p>
 
-          <p class="col-t" style="margin-top:24px">HashiCorp Vault &mdash; Secretos efímeros</p>
-          <ul class="items">
-            <li><span class="mk">—</span><span>Pod se autentica ante Vault con su <strong>SVID</strong>; sin contraseña estática</span></li>
-            <li><span class="mk">—</span><span>Vault emite credenciales <strong>dinámicas</strong> con TTL corto (~15 min)</span></li>
-            <li><span class="mk">—</span><span>Renovación automática: cero credenciales estáticas en el sistema</span></li>
-          </ul>
+      <div class="flow">
+        <div class="flow-col">
+          <div class="flow-ph">Fase 1 &mdash; sem. 1–4</div>
+          <div class="flow-items">Inventario y visibilidad<br>Sin cambiar nada todavía<br>Mapear tráfico real<br>Identificar secretos expuestos</div>
         </div>
-        <div>
-          <div class="diagram" style="height:100%;margin:0">Pod inicia
-  │
-  ├─▶ SPIRE emite SVID
-  │
-  ├─▶ SVID autentica ante Vault
-  │     └─▶ Vault emite
-  │         creds. dinámicas
-  │
-  ├─▶ Envoy sidecar
-  │     ├─▶ mTLS con peers
-  │     └─▶ OPA: Allow/Deny
-  │
-  └─▶ NetworkPolicy:
-        solo tráfico
-        explícitamente
-        permitido</div>
+        <div class="flow-col">
+          <div class="flow-ph">Fase 2 &mdash; mes 2–3</div>
+          <div class="flow-items">Autenticación fuerte<br>SSO para usuarios humanos<br>Identidad de workload<br>MFA obligatorio</div>
+        </div>
+        <div class="flow-col">
+          <div class="flow-ph">Fase 3 &mdash; mes 4–6</div>
+          <div class="flow-items">Autorización granular<br>Privilegio mínimo<br>Deny-all en servicios no críticos<br>Secretos dinámicos</div>
+        </div>
+        <div class="flow-col">
+          <div class="flow-ph">Fase 4 &mdash; mes 7–12</div>
+          <div class="flow-items">Madurez operativa<br>Políticas en CI/CD<br>Auditoría continua<br>Expansión al resto</div>
         </div>
       </div>
+
+      <ul class="items" style="margin-top:24px">
+        <li><span class="mk">—</span><span>Elegir un <strong>servicio piloto</strong> no crítico para validar cada fase antes de expandir</span></li>
+        <li><span class="mk">—</span><span>Medir antes y después: latencia, incidentes de acceso, tiempo de rotación de credenciales</span></li>
+        <li><span class="mk">—</span><span>Involucrar a los equipos de desarrollo desde la Fase 1 &mdash; ZTA sin cultura DevSecOps no escala</span></li>
+      </ul>
     </section>
 
     <!-- 08 -->
